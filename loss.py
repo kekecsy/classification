@@ -136,7 +136,7 @@ class ClassificationLoss(torch.nn.Module):
             elif self.loss_type == LossType.SIGMOID_FOCAL_CROSS_ENTROPY:
                 hierar_penalty, hierar_paras, cluster_nodes_relations, hierar_relations = argvs[0:4]
                 return self.criterion(logits, target) + \
-                    hierar_penalty * self.cal_recursive_regularize2(hierar_paras.clone().detach(),
+                    hierar_penalty * self.cal_recursive_regularize2(hierar_paras,
                                                                     logits,
                                                                     cluster_nodes_relations,
                                                                     device)

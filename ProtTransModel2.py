@@ -211,7 +211,7 @@ class ClassificationHead(nn.Module):
         ) @ v
         out = self.out_proj(score)
 
-        return out
+        return hidden_states
 
 @dataclass
 class MySequenceClassifierOutput(ModelOutput):
