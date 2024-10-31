@@ -44,6 +44,7 @@ name:  layer_classifier.linear.weight param num:  16640
 name:  layer_classifier.linear.bias param num:  130
 name:  node_classifier.layer_score.weight param num:  66560
 name:  node_classifier.layer_score.bias param num:  512
+<<<<<<< HEAD
 name:  node_classifier.node_score.weight param num:  524288
 name:  node_classifier.node_score.bias param num:  512
 name:  node_classifier.v.weight param num:  524288
@@ -89,3 +90,18 @@ save checkpoint -> step_200
 step_200 saved!
 ep: 0, global_step: 210, layer accuracy: 0.353125, total loss: 0.6023999452590942, layer loss: 0.10956867039203644, node loss: 0.492831289768219
 ep: 0, global_step: 220, layer accuracy: 0.390625, total loss: 0.5696378946304321, layer loss: 0.10123248398303986, node loss: 0.46840542554855347
+=======
+name:  node_classifier.batch_norm1.weight param num:  1536
+name:  node_classifier.batch_norm1.bias param num:  1536
+name:  node_classifier.out_proj.weight param num:  2390016
+name:  node_classifier.out_proj.bias param num:  1556
+trainable paras number: 3370712
+dataloader had set epoch
+ep: 0, global_step: 2, layer accuracy: 0.0, total loss: 1.8931503295898438, layer loss: 1.879571557044983, node loss: 0.013578761368989944
+ep: 0, global_step: 4, layer accuracy: 0.0, total loss: 1.8910402059555054, layer loss: 1.8790339231491089, node loss: 0.012006249278783798
+ep: 0, global_step: 6, layer accuracy: 0.0, total loss: 1.890047311782837, layer loss: 1.8797862529754639, node loss: 0.010260988026857376
+ep: 0, global_step: 8, layer accuracy: 0.0, total loss: 1.8666374683380127, layer loss: 1.8576667308807373, node loss: 0.008970756083726883
+ep: 0, global_step: 10, layer accuracy: 0.0, total loss: 1.871443748474121, layer loss: 1.8633387088775635, node loss: 0.008105020970106125
+ep: 0, global_step: 12, layer accuracy: 0.0, total loss: 1.8575994968414307, layer loss: 1.8501229286193848, node loss: 0.007476551458239555
+ep: 0, global_step: 14, layer accuracy: 0.0, total loss: 1.8548622131347656, layer loss: 1.8480701446533203, node loss: 0.006792170461267233
+>>>>>>> 2b054e6 (修复了未设置accelerator.sync_gradients造成的数据的同步问题)

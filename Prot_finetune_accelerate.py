@@ -373,13 +373,13 @@ def evaluate(model, validloader, accelerator: Accelerator):
             if not only_layer_metrics:
                 pred0 = output.node_logits > 0
                 pred0, refs0 = accelerator.gather_for_metrics((pred0, batch["nodes"]))
-                # pred0 = pred0.cpu()
-                # refs0 = refs0.cpu()
+                pred0 = pred0.cpu()
+                refs0 = refs0.cpu()
                 if accelerator.is_local_main_process:
                     subset_acc_num_layer0 += ((pred0 - refs0) == 0).all(dim=-1).sum().item()
                     # MCM0 = multilabel_confusion_matrix(pred0.int(), refs0.int())
                     # tp_sum_layer0 += MCM0[:, 1, 1]
-                    # pred_sum_layer0 += MCM0[:, 1, 1] + MCM0[:, 0, 1]
+                    # ppred1red_sum_layer0 += MCM0[:, 1, 1] + MCM0[:, 0, 1]
                     # true_sum_layer0 += MCM0[:, 1, 1] + MCM0[:, 1, 0]
                     # for go in high_freq:
                     #     idx = go2index(go)
@@ -396,6 +396,8 @@ def evaluate(model, validloader, accelerator: Accelerator):
 
             pred1 = output.layer_logits > 0
             pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
+            pred1 = pred1.cpu()
+            refs1 = refs1.cpu()
             layer_batch_acc += ((pred1 - refs1) == 0).all(dim=-1).sum().item()
         
         precision = metrics_compute(tp_sum_layer1, pred_sum_layer1)
@@ -464,15 +466,15 @@ def train(model, optimizer, trainloader, validloader, accelerator: Accelerator, 
                 if not only_layer_metrics:
                     pred0 = (output.node_logits > 0).int()
                     pred0, refs0 = accelerator.gather_for_metrics((pred0, batch["nodes"]))
-                    # pred0 = pred0.cpu()
-                    # refs0 = refs0.cpu()
+                    pred0 = pred0.cpu()
+                    refs0 = refs0.cpu()
                     subset_acc_num_layer0 += ((pred0 - refs0) == 0).all(dim=-1).sum().item()
                     # jac_sim.append(jaccard_similarity(pred0,refs0))
                 
                 pred1 = (output.layer_logits > 0).int()
                 pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
-                # pred1 = pred1.cpu()
-                # refs1 = refs1.cpu()
+                pred1 = pred1.cpu()
+                refs1 = refs1.cpu()
 
                 # layer_batch_acc = accuracy_score(pred1,refs1,normalize=True)
                 layer_batch_acc = ((refs1 - pred1) == 0).all(dim=-1).sum().item() / pred1.size()[0]
