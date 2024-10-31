@@ -1,0 +1,457 @@
+
+[2024-10-28 19:26:16,454] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 19:26:17,875] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 19:26:18,025] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 19:26:18,343] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 19:26:18,494] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 19:26:19,885] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 19:26:20,256] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 19:26:20,416] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from ./ckpts2/step_2/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-28 19:26:20,421] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-28 19:26:20,421] [INFO] [engine.py:3076:_get_all_zero_checkpoint_state_dicts] successfully read 2 ZeRO state_dicts for rank 1
+[2024-10-28 19:26:20,426] [INFO] [engine.py:3026:_load_zero_checkpoint] loading 2 zero partition checkpoints for rank 1
+[2024-10-28 19:26:20,771] [INFO] [torch_checkpoint_engine.py:27:load] [Torch] Loading checkpoint from ./ckpts2/step_2/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-28 19:26:20,775] [INFO] [torch_checkpoint_engine.py:29:load] [Torch] Loaded checkpoint from ./ckpts2/step_2/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-28 19:26:20,775] [INFO] [engine.py:3076:_get_all_zero_checkpoint_state_dicts] successfully read 2 ZeRO state_dicts for rank 0
+[2024-10-28 19:26:20,780] [INFO] [engine.py:3026:_load_zero_checkpoint] loading 2 zero partition checkpoints for rank 0
+resume from checkpoint -> ./ckpts2/step_2
+ep: 0, global_step: 10, layer accuracy: 143, total loss: 2.1722850799560547, layer loss: 0.09845635294914246, node loss: 2.07382869720459
+ep: 0, global_step: 20, layer accuracy: 162, total loss: 2.071044921875, layer loss: 0.09395982325077057, node loss: 1.9770851135253906
+ep: 0, global_step: 30, layer accuracy: 159, total loss: 1.787014126777649, layer loss: 0.09104110300540924, node loss: 1.6959729194641113
+ep: 0, global_step: 40, layer accuracy: 141, total loss: 2.3583219051361084, layer loss: 0.09882509708404541, node loss: 2.2594966888427734
+ep: 0, global_step: 50, layer accuracy: 165, total loss: 2.215078115463257, layer loss: 0.09484447538852692, node loss: 2.1202335357666016
+ep: 0, global_step: 60, layer accuracy: 167, total loss: 2.246793031692505, layer loss: 0.0907859355211258, node loss: 2.1560072898864746
+ep: 0, global_step: 70, layer accuracy: 169, total loss: 2.123086929321289, layer loss: 0.09190636873245239, node loss: 2.0311806201934814
+ep: 0, global_step: 80, layer accuracy: 176, total loss: 2.043224334716797, layer loss: 0.09016990661621094, node loss: 1.953054428100586
+ep: 0, global_step: 90, layer accuracy: 162, total loss: 1.971517562866211, layer loss: 0.0864643007516861, node loss: 1.8850531578063965
+ep: 0, global_step: 100, layer accuracy: 179, total loss: 1.827176809310913, layer loss: 0.08148090541362762, node loss: 1.745695948600769
+ep: 0, global_step: 110, layer accuracy: 166, total loss: 2.3851122856140137, layer loss: 0.09524421393871307, node loss: 2.289868116378784
+ep: 0, global_step: 120, layer accuracy: 190, total loss: 1.7341248989105225, layer loss: 0.07938472926616669, node loss: 1.6547400951385498
+ep: 0, global_step: 130, layer accuracy: 193, total loss: 2.0308523178100586, layer loss: 0.08183182775974274, node loss: 1.949020504951477
+ep: 0, global_step: 140, layer accuracy: 202, total loss: 1.8374905586242676, layer loss: 0.07811819016933441, node loss: 1.759372353553772
+ep: 0, global_step: 150, layer accuracy: 210, total loss: 1.6882176399230957, layer loss: 0.07298099994659424, node loss: 1.6152366399765015
+ep: 0, global_step: 160, layer accuracy: 197, total loss: 1.802783489227295, layer loss: 0.0802401751279831, node loss: 1.7225433588027954
+ep: 0, global_step: 170, layer accuracy: 201, total loss: 1.643088698387146, layer loss: 0.07774192094802856, node loss: 1.5653468370437622
+ep: 0, global_step: 180, layer accuracy: 189, total loss: 2.078561305999756, layer loss: 0.08419586718082428, node loss: 1.9943653345108032
+ep: 0, global_step: 190, layer accuracy: 189, total loss: 1.7862493991851807, layer loss: 0.07748319208621979, node loss: 1.708766222000122
+ep: 0, global_step: 200, layer accuracy: 203, total loss: 1.9647068977355957, layer loss: 0.08270531892776489, node loss: 1.882001519203186
+save checkpoint -> step_0
+[2024-10-28 20:33:59,882] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-28 20:34:00,639] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_200/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-28 20:34:00,639] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_200/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 20:34:04,715] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_200/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 20:34:04,749] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-28 20:34:04,749] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-28 20:34:04,768] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-28 20:34:04,768] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-28 20:34:04,768] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-28 20:34:04,768] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-28 20:34:04,768] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-28 20:34:04,768] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_200 saved!
+ep: 0, global_step: 210, layer accuracy: 201, total loss: 1.8210420608520508, layer loss: 0.07870503515005112, node loss: 1.7423369884490967
+ep: 0, global_step: 220, layer accuracy: 201, total loss: 1.8708488941192627, layer loss: 0.07668771594762802, node loss: 1.7941612005233765
+ep: 0, global_step: 230, layer accuracy: 208, total loss: 2.039921998977661, layer loss: 0.07851750403642654, node loss: 1.96140456199646
+ep: 0, global_step: 240, layer accuracy: 197, total loss: 1.9432674646377563, layer loss: 0.080301433801651, node loss: 1.8629660606384277
+ep: 0, global_step: 250, layer accuracy: 201, total loss: 2.133737087249756, layer loss: 0.07952530682086945, node loss: 2.0542118549346924
+ep: 0, global_step: 260, layer accuracy: 210, total loss: 1.987799882888794, layer loss: 0.07758831232786179, node loss: 1.9102115631103516
+ep: 0, global_step: 270, layer accuracy: 207, total loss: 1.7247779369354248, layer loss: 0.0699077844619751, node loss: 1.6548701524734497
+ep: 0, global_step: 280, layer accuracy: 212, total loss: 1.900991678237915, layer loss: 0.07412576675415039, node loss: 1.8268659114837646
+ep: 0, global_step: 290, layer accuracy: 215, total loss: 1.8542191982269287, layer loss: 0.07690046727657318, node loss: 1.7773187160491943
+ep: 0, global_step: 300, layer accuracy: 236, total loss: 1.6154741048812866, layer loss: 0.0750192254781723, node loss: 1.5404548645019531
+ep: 0, global_step: 310, layer accuracy: 220, total loss: 1.8246451616287231, layer loss: 0.07331033051013947, node loss: 1.7513349056243896
+ep: 0, global_step: 320, layer accuracy: 221, total loss: 1.944533109664917, layer loss: 0.07515831291675568, node loss: 1.8693747520446777
+ep: 0, global_step: 330, layer accuracy: 212, total loss: 2.0131149291992188, layer loss: 0.08058352768421173, node loss: 1.932531476020813
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.951, 'GO:0005737': 0.848, 'GO:0032991': 0.935, 'GO:0016020': 0.866, 'GO:0043226': 0.873, 'GO:0043229': 0.875, 'GO:0005886': 0.857, 'GO:1990904': 0.953, 'GO:0043228': 0.923, 'GO:0043232': 0.924}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.957, 'GO:0005737': 0.948, 'GO:0032991': 0.923, 'GO:0016020': 0.936, 'GO:0043226': 0.878, 'GO:0043229': 0.876, 'GO:0005886': 0.91, 'GO:1990904': 0.993, 'GO:0043228': 0.949, 'GO:0043232': 0.952}
+valid layer_batch_acc: 0.7328803738640087
+ep: 0, time: 9860.996149778366
+训练集的acc: 0.046294163189002396
+验证集的acc: 0.07096173412198865
+ep: 1, global_step: 340, layer accuracy: 236, total loss: 1.5460567474365234, layer loss: 0.06366448104381561, node loss: 1.4823921918869019
+ep: 1, global_step: 350, layer accuracy: 220, total loss: 1.6578872203826904, layer loss: 0.07155245542526245, node loss: 1.5863348245620728
+ep: 1, global_step: 360, layer accuracy: 212, total loss: 1.8694572448730469, layer loss: 0.07176199555397034, node loss: 1.797695279121399
+ep: 1, global_step: 370, layer accuracy: 230, total loss: 1.8791353702545166, layer loss: 0.0689556747674942, node loss: 1.8101797103881836
+ep: 1, global_step: 380, layer accuracy: 231, total loss: 1.4112744331359863, layer loss: 0.06265223026275635, node loss: 1.3486223220825195
+ep: 1, global_step: 390, layer accuracy: 219, total loss: 1.780274510383606, layer loss: 0.07076510787010193, node loss: 1.7095093727111816
+ep: 1, global_step: 400, layer accuracy: 242, total loss: 1.695404052734375, layer loss: 0.0694451779127121, node loss: 1.6259589195251465
+save checkpoint -> step_1
+[2024-10-28 22:31:49,516] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-28 22:31:50,276] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_400/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-28 22:31:50,276] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_400/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 22:31:54,353] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_400/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 22:31:54,404] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-28 22:31:54,404] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-28 22:31:54,423] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-28 22:31:54,423] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-28 22:31:54,423] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-28 22:31:54,423] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-28 22:31:54,423] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-28 22:31:54,423] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_400 saved!
+ep: 1, global_step: 410, layer accuracy: 230, total loss: 1.7179007530212402, layer loss: 0.06732237339019775, node loss: 1.6505783796310425
+ep: 1, global_step: 420, layer accuracy: 202, total loss: 1.7379142045974731, layer loss: 0.06899036467075348, node loss: 1.6689238548278809
+ep: 1, global_step: 430, layer accuracy: 231, total loss: 1.6050336360931396, layer loss: 0.06712469458580017, node loss: 1.537908911705017
+ep: 1, global_step: 440, layer accuracy: 226, total loss: 1.8468286991119385, layer loss: 0.06829747557640076, node loss: 1.7785313129425049
+ep: 1, global_step: 450, layer accuracy: 206, total loss: 2.027282238006592, layer loss: 0.07388485968112946, node loss: 1.953397274017334
+ep: 1, global_step: 460, layer accuracy: 229, total loss: 1.7414823770523071, layer loss: 0.0692330002784729, node loss: 1.6722493171691895
+ep: 1, global_step: 470, layer accuracy: 232, total loss: 1.7628588676452637, layer loss: 0.06759724020957947, node loss: 1.6952615976333618
+ep: 1, global_step: 480, layer accuracy: 227, total loss: 1.7188997268676758, layer loss: 0.07037925720214844, node loss: 1.6485204696655273
+ep: 1, global_step: 490, layer accuracy: 229, total loss: 1.8521194458007812, layer loss: 0.06993450224399567, node loss: 1.7821848392486572
+ep: 1, global_step: 500, layer accuracy: 238, total loss: 1.3644315004348755, layer loss: 0.060423653572797775, node loss: 1.3040077686309814
+ep: 1, global_step: 510, layer accuracy: 236, total loss: 1.7364685535430908, layer loss: 0.07209509611129761, node loss: 1.6643733978271484
+ep: 1, global_step: 520, layer accuracy: 222, total loss: 1.9047095775604248, layer loss: 0.07116538286209106, node loss: 1.8335442543029785
+ep: 1, global_step: 530, layer accuracy: 244, total loss: 1.9012095928192139, layer loss: 0.07113656401634216, node loss: 1.8300731182098389
+ep: 1, global_step: 540, layer accuracy: 230, total loss: 1.8389447927474976, layer loss: 0.06964674592018127, node loss: 1.7692980766296387
+ep: 1, global_step: 550, layer accuracy: 246, total loss: 1.5646545886993408, layer loss: 0.06428131461143494, node loss: 1.500373363494873
+ep: 1, global_step: 560, layer accuracy: 236, total loss: 1.8101227283477783, layer loss: 0.06995952129364014, node loss: 1.7401630878448486
+ep: 1, global_step: 570, layer accuracy: 225, total loss: 1.8675142526626587, layer loss: 0.07567477226257324, node loss: 1.791839361190796
+ep: 1, global_step: 580, layer accuracy: 226, total loss: 1.8407514095306396, layer loss: 0.07250472903251648, node loss: 1.7682466506958008
+ep: 1, global_step: 590, layer accuracy: 242, total loss: 1.4780858755111694, layer loss: 0.062058817595243454, node loss: 1.4160270690917969
+ep: 1, global_step: 600, layer accuracy: 239, total loss: 1.6048251390457153, layer loss: 0.06489831209182739, node loss: 1.5399267673492432
+save checkpoint -> step_1
+[2024-10-28 23:40:09,697] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-28 23:40:10,451] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_600/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-28 23:40:10,451] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_600/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-28 23:40:14,511] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_600/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-28 23:40:14,543] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-28 23:40:14,543] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-28 23:40:14,561] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-28 23:40:14,561] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-28 23:40:14,561] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-28 23:40:14,561] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-28 23:40:14,562] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-28 23:40:14,562] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_600 saved!
+ep: 1, global_step: 610, layer accuracy: 238, total loss: 1.6967731714248657, layer loss: 0.06329886615276337, node loss: 1.633474349975586
+ep: 1, global_step: 620, layer accuracy: 249, total loss: 1.6166751384735107, layer loss: 0.06596803665161133, node loss: 1.5507071018218994
+ep: 1, global_step: 630, layer accuracy: 244, total loss: 1.8625125885009766, layer loss: 0.06987717747688293, node loss: 1.792635440826416
+ep: 1, global_step: 640, layer accuracy: 221, total loss: 1.8581671714782715, layer loss: 0.0677904486656189, node loss: 1.7903767824172974
+ep: 1, global_step: 650, layer accuracy: 250, total loss: 1.3966150283813477, layer loss: 0.056832458823919296, node loss: 1.339782476425171
+ep: 1, global_step: 660, layer accuracy: 243, total loss: 1.5641001462936401, layer loss: 0.06562121212482452, node loss: 1.498478889465332
+ep: 1, global_step: 670, layer accuracy: 235, total loss: 1.7281526327133179, layer loss: 0.06981697678565979, node loss: 1.6583356857299805
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.938, 'GO:0005737': 0.877, 'GO:0032991': 0.94, 'GO:0016020': 0.867, 'GO:0043226': 0.889, 'GO:0043229': 0.89, 'GO:0005886': 0.872, 'GO:1990904': 0.963, 'GO:0043228': 0.904, 'GO:0043232': 0.903}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.972, 'GO:0005737': 0.955, 'GO:0032991': 0.942, 'GO:0016020': 0.973, 'GO:0043226': 0.878, 'GO:0043229': 0.878, 'GO:0005886': 0.942, 'GO:1990904': 0.997, 'GO:0043228': 0.97, 'GO:0043232': 0.97}
+valid layer_batch_acc: 0.7922968149131732
+ep: 1, time: 19778.237118959427
+训练集的acc: 0.07276469588534094
+验证集的acc: 0.08441256100294883
+ep: 2, global_step: 680, layer accuracy: 245, total loss: 1.557780146598816, layer loss: 0.06188579648733139, node loss: 1.495894432067871
+ep: 2, global_step: 690, layer accuracy: 244, total loss: 1.5672072172164917, layer loss: 0.06558911502361298, node loss: 1.5016181468963623
+ep: 2, global_step: 700, layer accuracy: 253, total loss: 1.538796067237854, layer loss: 0.06269355863332748, node loss: 1.476102590560913
+ep: 2, global_step: 710, layer accuracy: 255, total loss: 1.3614393472671509, layer loss: 0.056234605610370636, node loss: 1.3052047491073608
+ep: 2, global_step: 720, layer accuracy: 253, total loss: 1.5236055850982666, layer loss: 0.0589144267141819, node loss: 1.464691162109375
+ep: 2, global_step: 730, layer accuracy: 240, total loss: 1.6689949035644531, layer loss: 0.06722511351108551, node loss: 1.6017696857452393
+ep: 2, global_step: 740, layer accuracy: 242, total loss: 1.5334832668304443, layer loss: 0.06149569898843765, node loss: 1.4719874858856201
+ep: 2, global_step: 750, layer accuracy: 261, total loss: 1.4742968082427979, layer loss: 0.06149635463953018, node loss: 1.4128005504608154
+ep: 2, global_step: 760, layer accuracy: 250, total loss: 1.5383883714675903, layer loss: 0.06044650822877884, node loss: 1.477941870689392
+ep: 2, global_step: 770, layer accuracy: 239, total loss: 1.4776499271392822, layer loss: 0.06271196901798248, node loss: 1.414937973022461
+ep: 2, global_step: 780, layer accuracy: 264, total loss: 1.4141335487365723, layer loss: 0.05740080028772354, node loss: 1.3567328453063965
+ep: 2, global_step: 790, layer accuracy: 258, total loss: 1.469834566116333, layer loss: 0.06349329650402069, node loss: 1.406341314315796
+ep: 2, global_step: 800, layer accuracy: 247, total loss: 1.5975663661956787, layer loss: 0.06056283414363861, node loss: 1.537003517150879
+save checkpoint -> step_2
+[2024-10-29 01:38:14,784] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 01:38:15,539] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_800/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 01:38:15,539] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_800/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 01:38:19,606] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_800/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 01:38:19,636] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 01:38:19,636] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 01:38:19,655] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 01:38:19,655] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 01:38:19,655] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 01:38:19,655] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 01:38:19,655] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 01:38:19,655] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_800 saved!
+ep: 2, global_step: 810, layer accuracy: 238, total loss: 1.5182697772979736, layer loss: 0.06315423548221588, node loss: 1.455115556716919
+ep: 2, global_step: 820, layer accuracy: 240, total loss: 1.5090537071228027, layer loss: 0.06257075816392899, node loss: 1.4464828968048096
+ep: 2, global_step: 830, layer accuracy: 256, total loss: 1.335120439529419, layer loss: 0.05810907483100891, node loss: 1.2770113945007324
+ep: 2, global_step: 840, layer accuracy: 245, total loss: 1.617018461227417, layer loss: 0.06190891191363335, node loss: 1.5551095008850098
+ep: 2, global_step: 850, layer accuracy: 262, total loss: 1.439193844795227, layer loss: 0.060076236724853516, node loss: 1.3791176080703735
+ep: 2, global_step: 860, layer accuracy: 251, total loss: 1.688613772392273, layer loss: 0.0673956498503685, node loss: 1.6212180852890015
+ep: 2, global_step: 870, layer accuracy: 247, total loss: 1.4961491823196411, layer loss: 0.06208677589893341, node loss: 1.4340623617172241
+ep: 2, global_step: 880, layer accuracy: 258, total loss: 1.5354769229888916, layer loss: 0.06101902574300766, node loss: 1.4744579792022705
+ep: 2, global_step: 890, layer accuracy: 271, total loss: 1.305495262145996, layer loss: 0.057944197207689285, node loss: 1.2475512027740479
+ep: 2, global_step: 900, layer accuracy: 243, total loss: 1.6032785177230835, layer loss: 0.0610370859503746, node loss: 1.5422413349151611
+ep: 2, global_step: 910, layer accuracy: 271, total loss: 1.263535976409912, layer loss: 0.05763722211122513, node loss: 1.2058987617492676
+ep: 2, global_step: 920, layer accuracy: 247, total loss: 1.7078557014465332, layer loss: 0.06715431809425354, node loss: 1.6407012939453125
+ep: 2, global_step: 930, layer accuracy: 255, total loss: 1.58158540725708, layer loss: 0.06094026565551758, node loss: 1.5206451416015625
+ep: 2, global_step: 940, layer accuracy: 250, total loss: 1.3772664070129395, layer loss: 0.05931676924228668, node loss: 1.3179497718811035
+ep: 2, global_step: 950, layer accuracy: 247, total loss: 1.7636196613311768, layer loss: 0.06544582545757294, node loss: 1.698173999786377
+ep: 2, global_step: 960, layer accuracy: 263, total loss: 1.4193699359893799, layer loss: 0.060332294553518295, node loss: 1.3590376377105713
+ep: 2, global_step: 970, layer accuracy: 249, total loss: 1.6773549318313599, layer loss: 0.06069908291101456, node loss: 1.6166558265686035
+ep: 2, global_step: 980, layer accuracy: 257, total loss: 1.4204902648925781, layer loss: 0.05874403938651085, node loss: 1.3617463111877441
+ep: 2, global_step: 990, layer accuracy: 257, total loss: 1.6257084608078003, layer loss: 0.06399346888065338, node loss: 1.5617148876190186
+ep: 2, global_step: 1000, layer accuracy: 255, total loss: 1.450093150138855, layer loss: 0.059951335191726685, node loss: 1.3901418447494507
+save checkpoint -> step_2
+[2024-10-29 02:46:34,828] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 02:46:35,585] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_1000/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 02:46:35,585] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1000/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 02:46:39,650] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1000/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 02:46:39,680] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 02:46:39,680] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 02:46:39,698] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 02:46:39,698] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 02:46:39,698] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 02:46:39,698] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 02:46:39,699] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 02:46:39,699] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_1000 saved!
+ep: 2, global_step: 1010, layer accuracy: 261, total loss: 1.3823424577713013, layer loss: 0.06020417436957359, node loss: 1.3221383094787598
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.924, 'GO:0005737': 0.876, 'GO:0032991': 0.956, 'GO:0016020': 0.887, 'GO:0043226': 0.864, 'GO:0043229': 0.868, 'GO:0005886': 0.894, 'GO:1990904': 0.965, 'GO:0043228': 0.918, 'GO:0043232': 0.92}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.974, 'GO:0005737': 0.957, 'GO:0032991': 0.856, 'GO:0016020': 0.953, 'GO:0043226': 0.881, 'GO:0043229': 0.882, 'GO:0005886': 0.909, 'GO:1990904': 0.992, 'GO:0043228': 0.958, 'GO:0043232': 0.964}
+valid layer_batch_acc: 0.7966942006242563
+ep: 2, time: 29681.930027723312
+训练集的acc: 0.07663953773816493
+验证集的acc: 0.07847177913052475
+ep: 3, global_step: 1020, layer accuracy: 241, total loss: 1.645768642425537, layer loss: 0.06022360175848007, node loss: 1.5855450630187988
+ep: 3, global_step: 1030, layer accuracy: 254, total loss: 1.456857681274414, layer loss: 0.06061182916164398, node loss: 1.3962459564208984
+ep: 3, global_step: 1040, layer accuracy: 256, total loss: 1.6461634635925293, layer loss: 0.06016857177019119, node loss: 1.585994839668274
+ep: 3, global_step: 1050, layer accuracy: 264, total loss: 1.3746066093444824, layer loss: 0.05906691029667854, node loss: 1.3155397176742554
+ep: 3, global_step: 1060, layer accuracy: 257, total loss: 1.4257681369781494, layer loss: 0.061562471091747284, node loss: 1.3642055988311768
+ep: 3, global_step: 1070, layer accuracy: 266, total loss: 1.4760191440582275, layer loss: 0.059541795402765274, node loss: 1.4164772033691406
+ep: 3, global_step: 1080, layer accuracy: 273, total loss: 1.4166615009307861, layer loss: 0.055200621485710144, node loss: 1.3614609241485596
+ep: 3, global_step: 1090, layer accuracy: 268, total loss: 1.3812415599822998, layer loss: 0.05663810670375824, node loss: 1.32460355758667
+ep: 3, global_step: 1100, layer accuracy: 252, total loss: 1.396505355834961, layer loss: 0.05883026123046875, node loss: 1.3376750946044922
+ep: 3, global_step: 1110, layer accuracy: 267, total loss: 1.2918564081192017, layer loss: 0.05743633210659027, node loss: 1.2344200611114502
+ep: 3, global_step: 1120, layer accuracy: 268, total loss: 1.2872464656829834, layer loss: 0.057202741503715515, node loss: 1.230043649673462
+ep: 3, global_step: 1130, layer accuracy: 254, total loss: 1.5951290130615234, layer loss: 0.061971936374902725, node loss: 1.5331571102142334
+ep: 3, global_step: 1140, layer accuracy: 265, total loss: 1.531978726387024, layer loss: 0.057619497179985046, node loss: 1.4743592739105225
+ep: 3, global_step: 1150, layer accuracy: 261, total loss: 1.3124054670333862, layer loss: 0.05424811318516731, node loss: 1.2581573724746704
+ep: 3, global_step: 1160, layer accuracy: 265, total loss: 1.602705478668213, layer loss: 0.06084943562746048, node loss: 1.541856050491333
+ep: 3, global_step: 1170, layer accuracy: 245, total loss: 1.616259217262268, layer loss: 0.06011003255844116, node loss: 1.5561492443084717
+ep: 3, global_step: 1180, layer accuracy: 286, total loss: 1.348907232284546, layer loss: 0.05650404468178749, node loss: 1.2924031019210815
+ep: 3, global_step: 1190, layer accuracy: 244, total loss: 1.6210378408432007, layer loss: 0.062364984303712845, node loss: 1.5586729049682617
+ep: 3, global_step: 1200, layer accuracy: 257, total loss: 1.7328110933303833, layer loss: 0.06000765413045883, node loss: 1.6728034019470215
+save checkpoint -> step_3
+[2024-10-29 04:44:28,079] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 04:44:28,846] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_1200/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 04:44:28,846] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1200/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 04:44:32,935] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1200/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 04:44:32,978] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 04:44:32,978] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 04:44:32,997] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 04:44:32,997] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 04:44:32,997] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 04:44:32,997] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 04:44:32,997] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 04:44:32,997] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_1200 saved!
+ep: 3, global_step: 1210, layer accuracy: 253, total loss: 1.6451833248138428, layer loss: 0.06464888155460358, node loss: 1.5805344581604004
+ep: 3, global_step: 1220, layer accuracy: 254, total loss: 1.5008888244628906, layer loss: 0.06141174957156181, node loss: 1.4394769668579102
+ep: 3, global_step: 1230, layer accuracy: 259, total loss: 1.5404313802719116, layer loss: 0.06272231042385101, node loss: 1.4777090549468994
+ep: 3, global_step: 1240, layer accuracy: 240, total loss: 1.4956427812576294, layer loss: 0.05588745325803757, node loss: 1.4397554397583008
+ep: 3, global_step: 1250, layer accuracy: 255, total loss: 1.6952121257781982, layer loss: 0.06821131706237793, node loss: 1.6270008087158203
+ep: 3, global_step: 1260, layer accuracy: 257, total loss: 1.3244158029556274, layer loss: 0.058192260563373566, node loss: 1.2662235498428345
+ep: 3, global_step: 1270, layer accuracy: 260, total loss: 1.361642837524414, layer loss: 0.05833490192890167, node loss: 1.3033080101013184
+ep: 3, global_step: 1280, layer accuracy: 267, total loss: 1.2856559753417969, layer loss: 0.05186283960938454, node loss: 1.233793020248413
+ep: 3, global_step: 1290, layer accuracy: 266, total loss: 1.6076805591583252, layer loss: 0.05934137850999832, node loss: 1.5483392477035522
+ep: 3, global_step: 1300, layer accuracy: 251, total loss: 1.4347800016403198, layer loss: 0.05616972967982292, node loss: 1.3786102533340454
+ep: 3, global_step: 1310, layer accuracy: 265, total loss: 1.4306490421295166, layer loss: 0.052774421870708466, node loss: 1.3778746128082275
+ep: 3, global_step: 1320, layer accuracy: 262, total loss: 1.2742356061935425, layer loss: 0.05385211110115051, node loss: 1.2203835248947144
+ep: 3, global_step: 1330, layer accuracy: 264, total loss: 1.4219259023666382, layer loss: 0.05726351588964462, node loss: 1.3646624088287354
+ep: 3, global_step: 1340, layer accuracy: 250, total loss: 1.4827682971954346, layer loss: 0.059079691767692566, node loss: 1.4236886501312256
+ep: 3, global_step: 1350, layer accuracy: 266, total loss: 1.5742467641830444, layer loss: 0.05993375554680824, node loss: 1.514312982559204
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.933, 'GO:0005737': 0.87, 'GO:0032991': 0.948, 'GO:0016020': 0.885, 'GO:0043226': 0.883, 'GO:0043229': 0.887, 'GO:0005886': 0.881, 'GO:1990904': 0.969, 'GO:0043228': 0.908, 'GO:0043232': 0.915}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.973, 'GO:0005737': 0.966, 'GO:0032991': 0.925, 'GO:0016020': 0.96, 'GO:0043226': 0.883, 'GO:0043229': 0.885, 'GO:0005886': 0.939, 'GO:1990904': 0.994, 'GO:0043228': 0.968, 'GO:0043232': 0.968}
+valid layer_batch_acc: 0.8049802548759247
+ep: 3, time: 39573.715499162674
+训练集的acc: 0.07642426874634137
+验证集的acc: 0.08712859335391195
+ep: 4, global_step: 1360, layer accuracy: 254, total loss: 1.622127652168274, layer loss: 0.05801469832658768, node loss: 1.564112901687622
+ep: 4, global_step: 1370, layer accuracy: 274, total loss: 1.1955759525299072, layer loss: 0.051335979253053665, node loss: 1.144239902496338
+ep: 4, global_step: 1380, layer accuracy: 265, total loss: 1.5026144981384277, layer loss: 0.05970452353358269, node loss: 1.4429099559783936
+ep: 4, global_step: 1390, layer accuracy: 247, total loss: 1.635326862335205, layer loss: 0.06334987282752991, node loss: 1.571977138519287
+ep: 4, global_step: 1400, layer accuracy: 281, total loss: 1.3050165176391602, layer loss: 0.05155649781227112, node loss: 1.2534600496292114
+save checkpoint -> step_4
+[2024-10-29 06:42:15,492] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 06:42:16,246] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_1400/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 06:42:16,246] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1400/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 06:42:20,309] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1400/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 06:42:20,338] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 06:42:20,338] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 06:42:20,357] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 06:42:20,357] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 06:42:20,357] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 06:42:20,357] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 06:42:20,357] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1400/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 06:42:20,357] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_1400 saved!
+ep: 4, global_step: 1410, layer accuracy: 241, total loss: 1.837022304534912, layer loss: 0.06727850437164307, node loss: 1.769743800163269
+ep: 4, global_step: 1420, layer accuracy: 254, total loss: 1.4678752422332764, layer loss: 0.06012202054262161, node loss: 1.4077532291412354
+ep: 4, global_step: 1430, layer accuracy: 266, total loss: 1.4010648727416992, layer loss: 0.059821855276823044, node loss: 1.341243028640747
+ep: 4, global_step: 1440, layer accuracy: 252, total loss: 1.5740046501159668, layer loss: 0.05825284868478775, node loss: 1.515751838684082
+ep: 4, global_step: 1450, layer accuracy: 269, total loss: 1.5774197578430176, layer loss: 0.05947566032409668, node loss: 1.517944097518921
+ep: 4, global_step: 1460, layer accuracy: 266, total loss: 1.4278813600540161, layer loss: 0.0587296262383461, node loss: 1.3691518306732178
+ep: 4, global_step: 1470, layer accuracy: 262, total loss: 1.4765722751617432, layer loss: 0.056258317083120346, node loss: 1.4203139543533325
+ep: 4, global_step: 1480, layer accuracy: 270, total loss: 1.3358607292175293, layer loss: 0.05457479506731033, node loss: 1.2812860012054443
+ep: 4, global_step: 1490, layer accuracy: 255, total loss: 1.5459861755371094, layer loss: 0.05696432292461395, node loss: 1.4890217781066895
+ep: 4, global_step: 1500, layer accuracy: 261, total loss: 1.623023271560669, layer loss: 0.0613979771733284, node loss: 1.5616252422332764
+ep: 4, global_step: 1510, layer accuracy: 273, total loss: 1.247772216796875, layer loss: 0.04954419657588005, node loss: 1.198228120803833
+ep: 4, global_step: 1520, layer accuracy: 280, total loss: 1.2373676300048828, layer loss: 0.04727556183934212, node loss: 1.1900920867919922
+ep: 4, global_step: 1530, layer accuracy: 268, total loss: 1.2959281206130981, layer loss: 0.05211980640888214, node loss: 1.2438082695007324
+ep: 4, global_step: 1540, layer accuracy: 258, total loss: 1.3667612075805664, layer loss: 0.05665773153305054, node loss: 1.3101035356521606
+ep: 4, global_step: 1550, layer accuracy: 272, total loss: 1.4744834899902344, layer loss: 0.055727988481521606, node loss: 1.4187554121017456
+ep: 4, global_step: 1560, layer accuracy: 270, total loss: 1.4443318843841553, layer loss: 0.05632290616631508, node loss: 1.388008952140808
+ep: 4, global_step: 1570, layer accuracy: 273, total loss: 1.468461036682129, layer loss: 0.05455813556909561, node loss: 1.4139028787612915
+ep: 4, global_step: 1580, layer accuracy: 258, total loss: 1.5928421020507812, layer loss: 0.05652419477701187, node loss: 1.5363178253173828
+ep: 4, global_step: 1590, layer accuracy: 279, total loss: 1.3155229091644287, layer loss: 0.053309231996536255, node loss: 1.2622135877609253
+ep: 4, global_step: 1600, layer accuracy: 260, total loss: 1.4694325923919678, layer loss: 0.0621839202940464, node loss: 1.4072487354278564
+save checkpoint -> step_4
+[2024-10-29 07:50:36,789] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 07:50:37,538] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_1600/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 07:50:37,538] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1600/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 07:50:41,591] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1600/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 07:50:41,634] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 07:50:41,634] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 07:50:41,653] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 07:50:41,653] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 07:50:41,653] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 07:50:41,653] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 07:50:41,654] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1600/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 07:50:41,654] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_1600 saved!
+ep: 4, global_step: 1610, layer accuracy: 280, total loss: 1.3452699184417725, layer loss: 0.05446689575910568, node loss: 1.2908029556274414
+ep: 4, global_step: 1620, layer accuracy: 233, total loss: 1.433409333229065, layer loss: 0.06238056719303131, node loss: 1.3710287809371948
+ep: 4, global_step: 1630, layer accuracy: 255, total loss: 1.5715082883834839, layer loss: 0.059267669916152954, node loss: 1.5122406482696533
+ep: 4, global_step: 1640, layer accuracy: 273, total loss: 1.1891419887542725, layer loss: 0.05214019492268562, node loss: 1.1370017528533936
+ep: 4, global_step: 1650, layer accuracy: 262, total loss: 1.4407947063446045, layer loss: 0.060375750064849854, node loss: 1.3804188966751099
+ep: 4, global_step: 1660, layer accuracy: 257, total loss: 1.5811314582824707, layer loss: 0.05749701336026192, node loss: 1.523634433746338
+ep: 4, global_step: 1670, layer accuracy: 267, total loss: 1.4944233894348145, layer loss: 0.06046490743756294, node loss: 1.4339585304260254
+ep: 4, global_step: 1680, layer accuracy: 265, total loss: 1.528986930847168, layer loss: 0.05682481825351715, node loss: 1.472162127494812
+ep: 4, global_step: 1690, layer accuracy: 116, total loss: 1.304163932800293, layer loss: 0.05470641702413559, node loss: 1.2494574785232544
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.943, 'GO:0005737': 0.887, 'GO:0032991': 0.964, 'GO:0016020': 0.912, 'GO:0043226': 0.885, 'GO:0043229': 0.889, 'GO:0005886': 0.91, 'GO:1990904': 0.972, 'GO:0043228': 0.929, 'GO:0043232': 0.929}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.971, 'GO:0005737': 0.963, 'GO:0032991': 0.866, 'GO:0016020': 0.952, 'GO:0043226': 0.884, 'GO:0043229': 0.884, 'GO:0005886': 0.929, 'GO:1990904': 0.992, 'GO:0043228': 0.956, 'GO:0043232': 0.955}
+valid layer_batch_acc: 0.8103864526030798
+ep: 4, time: 49467.87992334366
+训练集的acc: 0.07637517230960969
+验证集的acc: 0.08004104226663677
+ep: 5, global_step: 1700, layer accuracy: 279, total loss: 1.3665761947631836, layer loss: 0.05152121186256409, node loss: 1.3150551319122314
+ep: 5, global_step: 1710, layer accuracy: 256, total loss: 1.4293770790100098, layer loss: 0.05611212179064751, node loss: 1.373265027999878
+ep: 5, global_step: 1720, layer accuracy: 269, total loss: 1.4683140516281128, layer loss: 0.05484204739332199, node loss: 1.4134719371795654
+ep: 5, global_step: 1730, layer accuracy: 291, total loss: 1.2551889419555664, layer loss: 0.05017479136586189, node loss: 1.2050141096115112
+ep: 5, global_step: 1740, layer accuracy: 270, total loss: 1.3090095520019531, layer loss: 0.052622728049755096, node loss: 1.2563867568969727
+ep: 5, global_step: 1750, layer accuracy: 248, total loss: 1.6302478313446045, layer loss: 0.0617830753326416, node loss: 1.568464756011963
+ep: 5, global_step: 1760, layer accuracy: 266, total loss: 1.327488899230957, layer loss: 0.055842217057943344, node loss: 1.2716466188430786
+ep: 5, global_step: 1770, layer accuracy: 264, total loss: 1.3094099760055542, layer loss: 0.049541860818862915, node loss: 1.2598681449890137
+ep: 5, global_step: 1780, layer accuracy: 272, total loss: 1.517141580581665, layer loss: 0.0562632754445076, node loss: 1.4608783721923828
+ep: 5, global_step: 1790, layer accuracy: 276, total loss: 1.1774171590805054, layer loss: 0.049658991396427155, node loss: 1.1277581453323364
+ep: 5, global_step: 1800, layer accuracy: 270, total loss: 1.4923388957977295, layer loss: 0.05672433599829674, node loss: 1.4356145858764648
+save checkpoint -> step_5
+[2024-10-29 09:48:16,779] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 09:48:17,535] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_1800/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 09:48:17,535] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1800/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 09:48:21,594] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1800/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 09:48:21,637] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 09:48:21,637] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 09:48:21,656] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 09:48:21,656] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 09:48:21,656] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 09:48:21,656] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 09:48:21,656] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_1800/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 09:48:21,656] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_1800 saved!
+
+ep: 5, global_step: 1810, layer accuracy: 0.7142857142857143, total loss: 1.2919750213623047, layer loss: 0.05224686861038208, node loss: 1.2397282123565674
+ep: 5, global_step: 1820, layer accuracy: 0.6964285714285714, total loss: 1.455190658569336, layer loss: 0.05352388694882393, node loss: 1.4016666412353516
+ep: 5, global_step: 1830, layer accuracy: 0.7219387755102041, total loss: 1.1456116437911987, layer loss: 0.05099368095397949, node loss: 1.0946180820465088
+ep: 5, global_step: 1840, layer accuracy: 0.7346938775510204, total loss: 1.2404062747955322, layer loss: 0.04927564412355423, node loss: 1.1911306381225586
+ep: 5, global_step: 1850, layer accuracy: 0.6964285714285714, total loss: 1.3508069515228271, layer loss: 0.05474107712507248, node loss: 1.2960658073425293
+ep: 5, global_step: 1860, layer accuracy: 0.7040816326530612, total loss: 1.1415029764175415, layer loss: 0.0525774210691452, node loss: 1.0889256000518799
+ep: 5, global_step: 1870, layer accuracy: 0.6454081632653061, total loss: 1.497186541557312, layer loss: 0.05996144935488701, node loss: 1.437225103378296
+ep: 5, global_step: 1880, layer accuracy: 0.7244897959183674, total loss: 1.3764734268188477, layer loss: 0.054198797792196274, node loss: 1.3222746849060059
+ep: 5, global_step: 1890, layer accuracy: 0.7142857142857143, total loss: 1.3675718307495117, layer loss: 0.05468882620334625, node loss: 1.312882900238037
+ep: 5, global_step: 1900, layer accuracy: 0.6785714285714286, total loss: 1.4859600067138672, layer loss: 0.054424963891506195, node loss: 1.4315351247787476
+ep: 5, global_step: 1910, layer accuracy: 0.6938775510204082, total loss: 1.3455462455749512, layer loss: 0.053452566266059875, node loss: 1.2920937538146973
+ep: 5, global_step: 1920, layer accuracy: 0.6581632653061225, total loss: 1.6488869190216064, layer loss: 0.05760805308818817, node loss: 1.5912789106369019
+ep: 5, global_step: 1930, layer accuracy: 0.6989795918367347, total loss: 1.420075535774231, layer loss: 0.05433138832449913, node loss: 1.3657441139221191
+ep: 5, global_step: 1940, layer accuracy: 0.7244897959183674, total loss: 1.5805654525756836, layer loss: 0.0541541650891304, node loss: 1.5264112949371338
+ep: 5, global_step: 1950, layer accuracy: 0.6887755102040817, total loss: 1.4916391372680664, layer loss: 0.056335993111133575, node loss: 1.4353032112121582
+ep: 5, global_step: 1960, layer accuracy: 0.7142857142857143, total loss: 1.200976014137268, layer loss: 0.05040549486875534, node loss: 1.1505705118179321
+ep: 5, global_step: 1970, layer accuracy: 0.6989795918367347, total loss: 1.4906854629516602, layer loss: 0.05087670683860779, node loss: 1.4398088455200195
+ep: 5, global_step: 1980, layer accuracy: 0.701530612244898, total loss: 1.3801541328430176, layer loss: 0.0556524358689785, node loss: 1.3245017528533936
+ep: 5, global_step: 1990, layer accuracy: 0.7321428571428571, total loss: 1.3004553318023682, layer loss: 0.0528879277408123, node loss: 1.2475672960281372
+ep: 5, global_step: 2000, layer accuracy: 0.7219387755102041, total loss: 1.358248233795166, layer loss: 0.054257508367300034, node loss: 1.3039906024932861
+save checkpoint -> step_2000
+[2024-10-29 12:06:05,801] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 12:06:06,558] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_2000/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 12:06:06,558] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2000/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 12:06:10,601] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2000/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 12:06:10,638] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 12:06:10,638] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 12:06:10,657] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 12:06:10,657] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 12:06:10,657] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 12:06:10,657] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 12:06:10,657] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_2000/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 12:06:10,657] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_2000 saved!
+ep: 5, global_step: 2010, layer accuracy: 0.7040816326530612, total loss: 1.53852117061615, layer loss: 0.05623910576105118, node loss: 1.482282042503357
+ep: 5, global_step: 2020, layer accuracy: 0.6887755102040817, total loss: 1.679509162902832, layer loss: 0.0604739710688591, node loss: 1.619035243988037
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.942, 'GO:0005737': 0.906, 'GO:0032991': 0.955, 'GO:0016020': 0.865, 'GO:0043226': 0.888, 'GO:0043229': 0.888, 'GO:0005886': 0.878, 'GO:1990904': 0.975, 'GO:0043228': 0.933, 'GO:0043232': 0.931}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.972, 'GO:0005737': 0.951, 'GO:0032991': 0.926, 'GO:0016020': 0.979, 'GO:0043226': 0.885, 'GO:0043229': 0.884, 'GO:0005886': 0.96, 'GO:1990904': 0.995, 'GO:0043228': 0.958, 'GO:0043232': 0.961}
+valid layer_batch_acc: 0.8209056890099846
+ep: 5, time: 7653.261434555054
+训练集的acc: 0.05339426327020035
+验证集的acc: 0.08329165876286881
+ep: 6, global_step: 2030, layer accuracy: 0.7346938775510204, total loss: 1.1098451614379883, layer loss: 0.04593197628855705, node loss: 1.063913345336914
+ep: 6, global_step: 2040, layer accuracy: 0.6862244897959183, total loss: 1.37587571144104, layer loss: 0.05164003372192383, node loss: 1.3242356777191162
+ep: 6, global_step: 2050, layer accuracy: 0.673469387755102, total loss: 1.2987861633300781, layer loss: 0.05136476084589958, node loss: 1.2474215030670166
+ep: 6, global_step: 2060, layer accuracy: 0.7346938775510204, total loss: 1.3861621618270874, layer loss: 0.05035638436675072, node loss: 1.3358057737350464
+ep: 6, global_step: 2070, layer accuracy: 0.7474489795918368, total loss: 1.166036605834961, layer loss: 0.04763247072696686, node loss: 1.1184040307998657
+ep: 6, global_step: 2080, layer accuracy: 0.6938775510204082, total loss: 1.446675181388855, layer loss: 0.05403713136911392, node loss: 1.392638087272644
+ep: 6, global_step: 2090, layer accuracy: 0.6938775510204082, total loss: 1.3896543979644775, layer loss: 0.05647741258144379, node loss: 1.333176851272583
+ep: 6, global_step: 2100, layer accuracy: 0.6836734693877551, total loss: 1.3400347232818604, layer loss: 0.05252820625901222, node loss: 1.2875065803527832
+ep: 6, global_step: 2110, layer accuracy: 0.6479591836734694, total loss: 1.256303071975708, layer loss: 0.0546649768948555, node loss: 1.2016379833221436
+ep: 6, global_step: 2120, layer accuracy: 0.6913265306122449, total loss: 1.297985553741455, layer loss: 0.05244079977273941, node loss: 1.245544672012329
+ep: 6, global_step: 2130, layer accuracy: 0.7066326530612245, total loss: 1.4233732223510742, layer loss: 0.05215853825211525, node loss: 1.3712146282196045
+ep: 6, global_step: 2140, layer accuracy: 0.6913265306122449, total loss: 1.4758269786834717, layer loss: 0.05680917948484421, node loss: 1.4190177917480469
+ep: 6, global_step: 2150, layer accuracy: 0.6581632653061225, total loss: 1.3951979875564575, layer loss: 0.05495224520564079, node loss: 1.3402457237243652
+ep: 6, global_step: 2160, layer accuracy: 0.7091836734693877, total loss: 1.335381031036377, layer loss: 0.05326524376869202, node loss: 1.2821159362792969
+ep: 6, global_step: 2170, layer accuracy: 0.6989795918367347, total loss: 1.415673017501831, layer loss: 0.05420297756791115, node loss: 1.3614699840545654
+ep: 6, global_step: 2180, layer accuracy: 0.6913265306122449, total loss: 1.4383728504180908, layer loss: 0.05580948293209076, node loss: 1.3825633525848389
+ep: 6, global_step: 2190, layer accuracy: 0.7295918367346939, total loss: 1.162445306777954, layer loss: 0.04847462847828865, node loss: 1.1139706373214722
+ep: 6, global_step: 2200, layer accuracy: 0.6887755102040817, total loss: 1.4597251415252686, layer loss: 0.058999672532081604, node loss: 1.4007254838943481
+save checkpoint -> step_2200
+[2024-10-29 14:04:03,816] [INFO] [logging.py:96:log_dist] [Rank 0] [Torch] Checkpoint pytorch_model is about to be saved!
+[2024-10-29 14:04:04,570] [INFO] [logging.py:96:log_dist] [Rank 0] Saving model checkpoint: ckpts2/step_2200/pytorch_model/mp_rank_00_model_states.pt
+[2024-10-29 14:04:04,570] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2200/pytorch_model/mp_rank_00_model_states.pt...
+[2024-10-29 14:04:08,614] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2200/pytorch_model/mp_rank_00_model_states.pt.
+[2024-10-29 14:04:08,648] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt...
+[2024-10-29 14:04:08,648] [INFO] [torch_checkpoint_engine.py:21:save] [Torch] Saving ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt...
+[2024-10-29 14:04:08,667] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt.
+[2024-10-29 14:04:08,667] [INFO] [torch_checkpoint_engine.py:23:save] [Torch] Saved ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt.
+[2024-10-29 14:04:08,667] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_0_mp_rank_00_optim_states.pt
+[2024-10-29 14:04:08,667] [INFO] [engine.py:3536:_save_zero_checkpoint] zero checkpoint saved ckpts2/step_2200/pytorch_model/bf16_zero_pp_rank_1_mp_rank_00_optim_states.pt
+[2024-10-29 14:04:08,667] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+[2024-10-29 14:04:08,667] [INFO] [torch_checkpoint_engine.py:33:commit] [Torch] Checkpoint pytorch_model is ready now!
+step_2200 saved!
+ep: 6, global_step: 2210, layer accuracy: 0.6709183673469388, total loss: 1.5392390489578247, layer loss: 0.05735636502504349, node loss: 1.4818826913833618
+ep: 6, global_step: 2220, layer accuracy: 0.7193877551020408, total loss: 1.6252357959747314, layer loss: 0.05608167499303818, node loss: 1.569154143333435
+ep: 6, global_step: 2230, layer accuracy: 0.673469387755102, total loss: 1.5265812873840332, layer loss: 0.05688898265361786, node loss: 1.469692349433899
+ep: 6, global_step: 2240, layer accuracy: 0.7346938775510204, total loss: 1.3296012878417969, layer loss: 0.05015221983194351, node loss: 1.2794491052627563
+ep: 6, global_step: 2250, layer accuracy: 0.7193877551020408, total loss: 1.3891403675079346, layer loss: 0.05392390117049217, node loss: 1.3352164030075073
+ep: 6, global_step: 2260, layer accuracy: 0.6836734693877551, total loss: 1.5795501470565796, layer loss: 0.05800896883010864, node loss: 1.5215411186218262
+ep: 6, global_step: 2270, layer accuracy: 0.6556122448979592, total loss: 1.4709224700927734, layer loss: 0.05794508755207062, node loss: 1.4129773378372192
+ep: 6, global_step: 2280, layer accuracy: 0.7040816326530612, total loss: 1.2335772514343262, layer loss: 0.05000185966491699, node loss: 1.1835753917694092
+ep: 6, global_step: 2290, layer accuracy: 0.7193877551020408, total loss: 1.278325080871582, layer loss: 0.05173525586724281, node loss: 1.2265899181365967
+ep: 6, global_step: 2300, layer accuracy: 0.7270408163265306, total loss: 1.3747320175170898, layer loss: 0.04974802955985069, node loss: 1.324984073638916
+ep: 6, global_step: 2310, layer accuracy: 0.7244897959183674, total loss: 1.3816649913787842, layer loss: 0.05384764447808266, node loss: 1.327817440032959
+ep: 6, global_step: 2320, layer accuracy: 0.6785714285714286, total loss: 1.625361442565918, layer loss: 0.05809059366583824, node loss: 1.5672708749771118
+ep: 6, global_step: 2330, layer accuracy: 0.6607142857142857, total loss: 1.4422369003295898, layer loss: 0.055403418838977814, node loss: 1.3868334293365479
+ep: 6, global_step: 2340, layer accuracy: 0.7270408163265306, total loss: 1.1734570264816284, layer loss: 0.04777027666568756, node loss: 1.125686764717102
+ep: 6, global_step: 2350, layer accuracy: 0.6989795918367347, total loss: 1.3789479732513428, layer loss: 0.053390298038721085, node loss: 1.3255575895309448
+ep: 6, global_step: 2360, layer accuracy: 0.6938775510204082, total loss: 1.5301144123077393, layer loss: 0.059256404638290405, node loss: 1.4708579778671265
+频率大于20000.0的验证集 precision: {'GO:0110165': 0.948, 'GO:0005737': 0.918, 'GO:0032991': 0.958, 'GO:0016020': 0.894, 'GO:0043226': 0.947, 'GO:0043229': 0.948, 'GO:0005886': 0.908, 'GO:1990904': 0.975, 'GO:0043228': 0.949, 'GO:0043232': 0.948}
+频率大于20000.0的验证集 recall: {'GO:0110165': 0.974, 'GO:0005737': 0.944, 'GO:0032991': 0.916, 'GO:0016020': 0.97, 'GO:0043226': 0.825, 'GO:0043229': 0.824, 'GO:0005886': 0.929, 'GO:1990904': 0.993, 'GO:0043228': 0.937, 'GO:0043232': 0.942}
+valid layer_batch_acc: 0.8290796530376451
+ep: 6, time: 17542.395408153534
+训练集的acc: 0.0789244103706781
+验证集的acc: 0.08257600579420235
+ep: 7, global_step: 2370, layer accuracy: 0.7091836734693877, total loss: 1.2857389450073242, layer loss: 0.05151344835758209, node loss: 1.2342255115509033
+ep: 7, global_step: 2380, layer accuracy: 0.6862244897959183, total loss: 1.316786289215088, layer loss: 0.054683901369571686, node loss: 1.2621023654937744
+ep: 7, global_step: 2390, layer accuracy: 0.7066326530612245, total loss: 1.46732497215271, layer loss: 0.05207110196352005, node loss: 1.4152538776397705
+ep: 7, global_step: 2400, layer accuracy: 0.7397959183673469, total loss: 1.1341657638549805, layer loss: 0.046533338725566864, node loss: 1.0876325368881226
+save checkpoint -> step_2400
+
+
