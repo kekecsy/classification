@@ -147,16 +147,19 @@ class MyDataset(Dataset):
         super().__init__()
         self.data = pd.concat(data_dirlist,axis=0).reset_index(drop=True)
         self.go = list(self.data.columns)[2:]
-        low_freq_label_indices = self.data[self.data[list(low_freq.keys())].eq(1).any(axis=1)].index.tolist()
-        self.high_freq_label_indices = self.data[self.data[list(high_freq.keys())].eq(1).any(axis=1) & self.data[list(low_freq.keys())].eq(0).all(axis=1)].index.tolist()
         
-        self.data = pd.concat([self.data] + [self.data.loc[low_freq_label_indices]] * 3, ignore_index=True)
+        low_freq_label_indices = self.data[self.data[list(low_freq.keys())].eq(1).any(axis=1)].index.tolist()
+        temp = self.data.loc[low_freq_label_indices]
+        temp['sequence'] = temp['sequence'].apply(lambda x: x[::-1])
+        self.data = pd.concat([self.data] + [temp]).reset_index(drop=True)
+
+        self.high_freq_label_indices = self.data[self.data[list(high_freq.keys())].eq(1).any(axis=1) & self.data[list(low_freq.keys())].eq(0).all(axis=1)].index.tolist()
         self.low_freq_label_indices = self.data[self.data[list(low_freq.keys())].eq(1).any(axis=1)].index.tolist()
 
-        self.high_freq_label_dict = {label: [] for label in high_freq.keys()}
-        for column in high_freq.keys():
-            indices = self.data[self.data[column] == 1].index.tolist()
-            self.high_freq_label_dict[column] = indices
+        # self.high_freq_label_dict = {}
+        # for column in high_freq.keys():
+        #     indices = self.data[self.data[column] == 1].index.tolist()
+        #     self.high_freq_label_dict[column] = indices
         
         self.other_indices = self.data.index.difference(self.low_freq_label_indices).difference(self.high_freq_label_indices)
 
@@ -479,6 +482,7 @@ def train(model, optimizer, trainloader, validloader, accelerator: Accelerator, 
 
         active_dataloader.set_epoch(ep)
         accelerator.print('dataloader had set epoch')
+
         for batch in active_dataloader:
             
             jac_sim = []
@@ -596,7 +600,7 @@ def main():
 
     # train(model, optimizer, trainloader, validloader, accelerator, resume='./ckpts2/step_2400')
 
-    train(model, optimizer, trainloader, validloader, accelerator, resume='./ckpts3/step_200')
+    train(model, optimizer, trainloader, validloader, accelerator, resume='./ckpts3/step_400')
 
     # evaluate(model, validloader, accelerator)
 

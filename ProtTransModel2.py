@@ -186,11 +186,11 @@ class ClassificationHead(nn.Module):
         # self.out_proj = nn.Linear(config.hidden_size, class_config.node_nums)
         self.dim = config.hidden_size // 2
         self.layer_score = nn.Linear(class_config.layer_nums, self.dim)
-        self.node_score =  nn.Linear(config.hidden_size, self.dim)
-        self.v = nn.Linear(config.hidden_size, self.dim)
-        self.batch_norm1 = nn.BatchNorm1d(self.dim)
+        # self.node_score =  nn.Linear(config.hidden_size, self.dim)
+        # self.v = nn.Linear(config.hidden_size, self.dim)
+        self.batch_norm1 = nn.BatchNorm1d(self.dim + config.hidden_size)
         self.dropout = nn.Dropout(class_config.dropout_rate)
-        self.out_proj = nn.Linear(self.dim, class_config.node_nums)
+        self.out_proj = nn.Linear(self.dim + config.hidden_size, class_config.node_nums)
 
 
     def forward(self, layer_logits, hidden_states):
@@ -205,17 +205,13 @@ class ClassificationHead(nn.Module):
         # return out
 
         layer_score = self.layer_score(layer_logits)
-        node_score = self.node_score(hidden_states)
-        v = self.v(hidden_states)
-        score = torch.softmax(
-            layer_score @ node_score.transpose(-1, -2) / math.sqrt(self.dim), dim=-1
-        ) @ v
-        score = self.batch_norm1(score)
-        score = self.dropout(score)
-        score = nn.ReLU()(score)
-        out = self.out_proj(score)
+        hidden_states = torch.concat((hidden_states, layer_score), dim=-1)
+        hidden_states = self.batch_norm1(hidden_states)
+        hidden_states = self.dropout(hidden_states)
+        hidden_states = nn.ReLU()(hidden_states)
+        hidden_states = self.out_proj(hidden_states)
 
-        return out
+        return hidden_states
 
 @dataclass
 class MySequenceClassifierOutput(ModelOutput):
@@ -301,7 +297,7 @@ class T5EncoderCLSModel(T5PreTrainedModel):
                             self.cluster_relations
                             )
         
-        node_logits = self.node_classifier(layer_logits.clone().detach(), hidden_states)
+        node_logits = self.node_classifier(layer_logits, hidden_states)
         mask_tensor = torch.zeros_like(node_logits)
         for idx, relation in enumerate(self.cluster_nodes_relations):
             relation_indices = torch.tensor(self.cluster_nodes_relations[relation])

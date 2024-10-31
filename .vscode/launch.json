@@ -5,20 +5,30 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
             "name": "Python 微调",
             "type": "debugpy",
             "request": "launch",
-            "module": "accelerate.commands.launch",          //调试accelerate launch
+            "module": "accelerate.commands.launch", //调试accelerate launch
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
                 "PYTHONPATH": "${workspaceRoot}"
             },
             "args": [
-                "--config_file","/data/csyData/uniprot_test/code/GOcode/cco_version2/my_config.yaml",
-                "--mixed_precision", "bf16",
-                "Prot_finetune_accelerate.py"
-              ]
+                "--config_file",
+                "/data/csyData/uniprot_test/code/GOcode/cco_version2/my_config.yaml",
+                "--mixed_precision",
+                "bf16",
+                "${file}"
+            ]
         }
     ]
 }
