@@ -415,11 +415,11 @@ def evaluate(model, validloader, accelerator: Accelerator):
             # validlabels.append(refs0.numpy())
 
             # 计算样本的 subset acc
-            if not only_layer_metrics:
+            if accelerator.sync_gradients:
                 pred0 = (output.node_logits > 0).int()
                 pred0, refs0 = accelerator.gather_for_metrics((pred0, batch["nodes"]))
-                # pred0 = pred0.cpu()
-                # refs0 = refs0.cpu()
+                pred0 = pred0.cpu()
+                refs0 = refs0.cpu()
                 if accelerator.is_local_main_process:
                     subset_acc_num_layer0 += ((pred0 - refs0) == 0).all(dim=-1).sum().item()
                     # MCM0 = calculate_multilabel_confusion_matrix(pred0, refs0)
@@ -439,16 +439,18 @@ def evaluate(model, validloader, accelerator: Accelerator):
                 # roc_auc = compute_roc(np.concatenate(validlabels,axis=0), np.concatenate(predlabels,axis=0))
                 # accelerator.print('roc_auc:', roc_auc)
 
-            pred1 = (output.layer_logits > 0).int()
-            pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
-            layer_batch_acc += ((pred1 - refs1) == 0).all(dim=-1).sum().item()
+                pred1 = (output.layer_logits > 0).int()
+                pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
+                pred1 = pred1.cpu()
+                refs1 = refs1.cpu()
+                layer_batch_acc += ((pred1 - refs1) == 0).all(dim=-1).sum().item()
         
         # precision = metrics_compute(tp_sum_layer1, pred_sum_layer1)
         # recall = metrics_compute(tp_sum_layer1, true_sum_layer1)
 
         # accelerator.print(f'频率大于{2e4}的验证集 precision:', precision)
         # accelerator.print(f'频率大于{2e4}的验证集 recall:', recall)
-        accelerator.print(f'valid layer_batch_acc:', layer_batch_acc / len(validloader.dataset))
+                accelerator.print(f'valid layer_batch_acc:', layer_batch_acc / len(validloader.dataset))
         # accelerator.print('验证集 TP / TP + FP:', tp_sum_layer1[0], ' / ', pred_sum_layer1[0])
         # accelerator.print('验证集 TP / TP + FN:', tp_sum_layer1[0], ' / ', true_sum_layer1[0])
 
@@ -508,23 +510,22 @@ def train(model, optimizer, trainloader, validloader, accelerator: Accelerator, 
                 # optimizer.step()
                 
                 # 计算样本的 subset acc
-                if not only_layer_metrics:
+                if accelerator.sync_gradients:
                     pred0 = (output.node_logits > 0).int()
                     pred0, refs0 = accelerator.gather_for_metrics((pred0, batch["nodes"]))
-                    # pred0 = pred0.cpu()
-                    # refs0 = refs0.cpu()
+                    pred0 = pred0.cpu()
+                    refs0 = refs0.cpu()
                     subset_acc_num_layer0 += ((pred0 - refs0) == 0).all(dim=-1).sum().item()
-                    # jac_sim.append(jaccard_similarity(pred0,refs0))
+                        # jac_sim.append(jaccard_similarity(pred0,refs0))
+                    
+                    pred1 = (output.layer_logits > 0).int()
+                    pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
+                    pred1 = pred1.cpu()
+                    refs1 = refs1.cpu()
+
+                    # layer_batch_acc = accuracy_score(pred1,refs1,normalize=True)
+                    layer_batch_acc = ((refs1 - pred1) == 0).all(dim=-1).sum().item() / pred1.size()[0]
                 
-                pred1 = (output.layer_logits > 0).int()
-                pred1, refs1 = accelerator.gather_for_metrics((pred1, batch["layers"]))
-                # pred1 = pred1.cpu()
-                # refs1 = refs1.cpu()
-
-                # layer_batch_acc = accuracy_score(pred1,refs1,normalize=True)
-                layer_batch_acc = ((refs1 - pred1) == 0).all(dim=-1).sum().item() / pred1.size()[0]
-
-                if accelerator.sync_gradients:
                     global_step += 1
 
                     if global_step % log_step == 0:

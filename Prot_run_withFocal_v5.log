@@ -1,0 +1,61 @@
+
+name:  shared.weight param num:  131072
+name:  encoder.block.23.layer.0.SelfAttention.q.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.q.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.k.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.k.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.v.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.v.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.o.lora_A.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.o.lora_B.default.weight param num:  8192
+name:  encoder.block.23.layer.1.DenseReluDense.wi.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.1.DenseReluDense.wi.lora_B.default.weight param num:  131072
+name:  encoder.block.23.layer.1.DenseReluDense.wo.lora_A.default.weight param num:  131072
+name:  encoder.block.23.layer.1.DenseReluDense.wo.lora_B.default.weight param num:  8192
+name:  layer_classifier.local_layers.0.0.weight param num:  4096
+name:  layer_classifier.local_layers.0.0.bias param num:  64
+name:  layer_classifier.local_layers.0.2.weight param num:  64
+name:  layer_classifier.local_layers.0.2.bias param num:  64
+name:  layer_classifier.local_layers.0.3.weight param num:  2816
+name:  layer_classifier.local_layers.0.3.bias param num:  44
+name:  layer_classifier.local_layers.1.0.weight param num:  8192
+name:  layer_classifier.local_layers.1.0.bias param num:  128
+name:  layer_classifier.local_layers.1.2.weight param num:  128
+name:  layer_classifier.local_layers.1.2.bias param num:  128
+name:  layer_classifier.local_layers.1.3.weight param num:  5376
+name:  layer_classifier.local_layers.1.3.bias param num:  42
+name:  layer_classifier.local_layers.2.0.weight param num:  16384
+name:  layer_classifier.local_layers.2.0.bias param num:  128
+name:  layer_classifier.local_layers.2.2.weight param num:  128
+name:  layer_classifier.local_layers.2.2.bias param num:  128
+name:  layer_classifier.local_layers.2.3.weight param num:  5632
+name:  layer_classifier.local_layers.2.3.bias param num:  44
+name:  layer_classifier.global_layers.0.0.weight param num:  65536
+name:  layer_classifier.global_layers.0.0.bias param num:  64
+name:  layer_classifier.global_layers.0.2.weight param num:  64
+name:  layer_classifier.global_layers.0.2.bias param num:  64
+name:  layer_classifier.global_layers.1.0.weight param num:  69632
+name:  layer_classifier.global_layers.1.0.bias param num:  64
+name:  layer_classifier.global_layers.1.2.weight param num:  64
+name:  layer_classifier.global_layers.1.2.bias param num:  64
+name:  layer_classifier.global_layers.2.0.weight param num:  139264
+name:  layer_classifier.global_layers.2.0.bias param num:  128
+name:  layer_classifier.global_layers.2.2.weight param num:  128
+name:  layer_classifier.global_layers.2.2.bias param num:  128
+name:  layer_classifier.linear.weight param num:  16640
+name:  layer_classifier.linear.bias param num:  130
+name:  node_classifier.layer_score.weight param num:  66560
+name:  node_classifier.layer_score.bias param num:  512
+name:  node_classifier.batch_norm1.weight param num:  1536
+name:  node_classifier.batch_norm1.bias param num:  1536
+name:  node_classifier.out_proj.weight param num:  2390016
+name:  node_classifier.out_proj.bias param num:  1556
+trainable paras number: 3370712
+dataloader had set epoch
+ep: 0, global_step: 2, layer accuracy: 0.0, total loss: 1.8931503295898438, layer loss: 1.879571557044983, node loss: 0.013578761368989944
+ep: 0, global_step: 4, layer accuracy: 0.0, total loss: 1.8910402059555054, layer loss: 1.8790339231491089, node loss: 0.012006249278783798
+ep: 0, global_step: 6, layer accuracy: 0.0, total loss: 1.890047311782837, layer loss: 1.8797862529754639, node loss: 0.010260988026857376
+ep: 0, global_step: 8, layer accuracy: 0.0, total loss: 1.8666374683380127, layer loss: 1.8576667308807373, node loss: 0.008970756083726883
+ep: 0, global_step: 10, layer accuracy: 0.0, total loss: 1.871443748474121, layer loss: 1.8633387088775635, node loss: 0.008105020970106125
+ep: 0, global_step: 12, layer accuracy: 0.0, total loss: 1.8575994968414307, layer loss: 1.8501229286193848, node loss: 0.007476551458239555
+ep: 0, global_step: 14, layer accuracy: 0.0, total loss: 1.8548622131347656, layer loss: 1.8480701446533203, node loss: 0.006792170461267233

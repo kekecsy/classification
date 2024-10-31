@@ -124,8 +124,8 @@ class HMCNClassificationHead(nn.Module):
 
     def __init__(self, config, class_config):
         super().__init__()
-        self.hierarchical_depth = [0, 64, 64, 128]
-        self.global2local = [0, 64, 128, 128]
+        self.hierarchical_depth = [0, 128, 192, 256]
+        self.global2local = [0, 128, 192, 256]
         self.hierarchical_class = [44, 42, 44]
         # 定义local层和global层
         self.local_layers = torch.nn.ModuleList()
@@ -296,15 +296,9 @@ class T5EncoderCLSModel(T5PreTrainedModel):
                             local_logits,
                             self.cluster_relations
                             )
-        
+
         node_logits = self.node_classifier(layer_logits, hidden_states)
-        mask_tensor = torch.zeros_like(node_logits)
-        for idx, relation in enumerate(self.cluster_nodes_relations):
-            relation_indices = torch.tensor(self.cluster_nodes_relations[relation])
-            mask_tensor[:, relation_indices] += layer_logits[:, idx].unsqueeze(1)
-        
-        
-        node_loss = 10 * self.nodes_loss_fn(
+        node_loss = self.nodes_loss_fn(
                             node_logits,
                             nodes,
                             True,
@@ -315,13 +309,19 @@ class T5EncoderCLSModel(T5PreTrainedModel):
                             self.hierar_relations
                             )
         
-        mask_logits = torch.where(
-                                mask_tensor < 0,
-                                torch.full_like(mask_tensor, float('-1e7')),  # 小于0的位置设置为-1e-7
-                                torch.zeros_like(mask_tensor)
-                            )
         
-        node_logits = node_logits + mask_logits
+        # mask_tensor = torch.zeros_like(node_logits)
+        # for idx, relation in enumerate(self.cluster_nodes_relations):
+        #     relation_indices = torch.tensor(self.cluster_nodes_relations[relation])
+        #     mask_tensor[:, relation_indices] += layer_logits[:, idx].unsqueeze(1)
+
+        # mask_logits = torch.where(
+        #                         mask_tensor < 0,
+        #                         torch.full_like(mask_tensor, float('-1e7')),  # 小于0的位置设置为-1e-7
+        #                         torch.zeros_like(mask_tensor)
+        #                     )
+        
+        # node_logits = node_logits + mask_logits
 
         return MySequenceClassifierOutput(layer_loss=layer_loss,
                                         node_loss=node_loss,
