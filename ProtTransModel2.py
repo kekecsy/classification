@@ -189,31 +189,21 @@ class ClassificationHead(nn.Module):
         # self.batch_norm2 = nn.BatchNorm1d(config.hidden_size // 2)
         # self.out_proj = nn.Linear(config.hidden_size, class_config.node_nums)
         self.dim = config.hidden_size // 2
-        self.layer_score = nn.Linear(class_config.layer_nums, config.hidden_size // 2)
-        self.node_score =  nn.Linear(config.hidden_size, config.hidden_size // 2)
-        self.v = nn.Linear(config.hidden_size, config.hidden_size // 2)
-        self.batch_norm1 = nn.BatchNorm1d(config.hidden_size // 2)
+        self.layer_score = nn.Linear(class_config.layer_nums, self.dim)
+        self.hidden_score =  nn.Linear(config.hidden_size, self.dim)
+        self.batch_norm1 = nn.BatchNorm1d(self.dim + self.dim)
         self.dropout = nn.Dropout(class_config.dropout_rate)
-        self.out_proj = nn.Linear(config.hidden_size // 2, class_config.node_nums)
+        self.out_proj = nn.Linear(self.dim + self.dim, class_config.node_nums)
 
 
     def forward(self, layer_logits, hidden_states):
-        # hidden_states = self.dense1(hidden_states)
-        # hidden_states = self.batch_norm1(hidden_states)
-        # hidden_states = torch.tanh(hidden_states)
-        # hidden_states = self.dense2(hidden_states)
-        # hidden_states = self.batch_norm2(hidden_states)
-        # hidden_states = torch.tanh(hidden_states)
-        # hidden_states = self.dropout(hidden_states)
-        # out = self.out_proj(hidden_states)
-        # return out
         layer_score = self.layer_score(layer_logits)
-        node_score = self.node_score(hidden_states)
-        v = self.v(hidden_states)
-        score = torch.softmax(
-            layer_score @ node_score.transpose(-1, -2) / math.sqrt(self.dim), dim=-1
-        ) @ v
-        out = self.out_proj(score)
+        hidden_score = self.hidden_score(hidden_states)
+        hidden_states = torch.concat((hidden_score, layer_score), dim=-1)
+        hidden_states = self.batch_norm1(hidden_states)
+        hidden_states = self.dropout(hidden_states)
+        hidden_states = nn.ReLU()(hidden_states)
+        hidden_states = self.out_proj(hidden_states)
 
         return hidden_states
 
@@ -280,7 +270,7 @@ class T5EncoderCLSModel(T5PreTrainedModel):
         self.cluster_relations = cluster_relations
         self.cluster_nodes_relations = cluster_nodes_relations
 
-        self.penalty = 1e-7
+        self.penalty = 1e-4
 
         self.layer_loss_fn = ClassificationLoss(label_size=class_config.layer_nums,\
                                                 loss_type=LossType.BCE_WITH_LOGITS,\
@@ -328,44 +318,6 @@ class T5EncoderCLSModel(T5PreTrainedModel):
                                     # layers=layers
                                     )
 
-        node_logits = self.node_classifier(layer_logits, hidden_states)
-        mask_tensor = torch.zeros_like(node_logits)
-        for idx, relation in enumerate(self.cluster_nodes_relations):
-            relation_indices = torch.tensor(self.cluster_nodes_relations[relation])
-            mask_tensor[:, relation_indices] += layer_logits[:, idx].unsqueeze(1)
-        
-        
-        node_loss = 1e2 * self.nodes_loss_fn(
-                            node_logits,
-                            nodes,
-                            True,
-                            True,
-                            self.penalty, # 惩罚因子
-                            layer_logits,
-                            self.cluster_nodes_relations,
-                            self.hierar_relations
-                            )
-        
-        
-        # mask_tensor = torch.zeros_like(node_logits)
-        # for idx, relation in enumerate(self.cluster_nodes_relations):
-        #     relation_indices = torch.tensor(self.cluster_nodes_relations[relation])
-        #     mask_tensor[:, relation_indices] += layer_logits[:, idx].unsqueeze(1)
-
-        # mask_logits = torch.where(
-        #                         mask_tensor < 0,
-        #                         torch.full_like(mask_tensor, float('-1e7')),  # 小于0的位置设置为-1e-7
-        #                         torch.zeros_like(mask_tensor)
-        #                     )
-        
-        # node_logits = node_logits + mask_logits
-
-        return MySequenceClassifierOutput(layer_loss=layer_loss,
-                                        node_loss=node_loss,
-                                        node_logits=node_logits,
-                                        layer_logits=layer_logits,
-                                        hidden_states=outputs.hidden_states,
-                                        attentions=outputs.attentions)
     
     def mean_pooling(self, hidden_states, attention_mask):
         input_mask_expanded = attention_mask.unsqueeze(-1).expand(hidden_states.size())
