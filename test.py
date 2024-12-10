@@ -227,25 +227,25 @@ def prepare_dataloader(accelerator):
         inputs["layers"] = torch.FloatTensor(np.stack(layers)).to('cuda')
         return inputs
 
-    high_freq_sampler = CommonLabelSampler(validset.high_freq_label_indices, \
+    high_freq_sampler = CommonLabelSampler(trainset.high_freq_label_indices, \
                                     num_replicas=accelerator.num_processes, \
                                     rank=accelerator.process_index, \
                                     shuffle=True, \
                                     drop_last=True)
 
-    low_freq_sampler = CycleLabelSampler(validset.low_freq_label_indices, \
+    low_freq_sampler = CycleLabelSampler(trainset.low_freq_label_indices, \
                                         num_replicas=accelerator.num_processes, \
                                         rank=accelerator.process_index, \
                                         shuffle=True, \
                                         drop_last=False)
 
-    other_sampler = CycleLabelSampler(validset.other_indices, \
+    other_sampler = CycleLabelSampler(trainset.other_indices, \
                                         num_replicas=accelerator.num_processes, \
                                         rank=accelerator.process_index, \
                                         shuffle=True, \
                                         drop_last=False)
 
-    valid_batch_sampler = SelectBatchSampler(high_freq_sampler, 
+    train_batch_sampler = SelectBatchSampler(high_freq_sampler, 
                                             low_freq_sampler,
                                             other_sampler,
                                             batch_size=valid_batch_size,
@@ -254,7 +254,7 @@ def prepare_dataloader(accelerator):
 
     trainloader = MyDataLoader(trainset, 
                             collate_fn=collate_func, 
-                            batch_sampler=valid_batch_sampler)
+                            batch_sampler=train_batch_sampler)
 
     # trainloader = MyDataLoader(trainset, batch_size=train_batch_size, collate_fn=collate_func, shuffle=True)
     validloader = MyDataLoader(validset, batch_size=valid_batch_size, collate_fn=collate_func, shuffle=False)
@@ -515,9 +515,9 @@ def train(model, optimizer, accelerator: Accelerator, trainloader, validloader, 
                 
                 global_logits, local_logits, layer_logits = model.layer_classifier(output.hidden_states)
 
-                # contra_loss = Contrastive_loss(db, layer_logits, batch['layers'][:,:len(main_numbers)], batch['layers'][:,len(main_numbers):])
                 contra_loss = None
-
+                contra_loss = Contrastive_loss(db, layer_logits, batch['layers'][:,:len(main_numbers)], batch['layers'][:,len(main_numbers):])
+                
                 # params_before_layerclassifier = {name: param.clone().detach() for name, param in model.named_parameters() \
                 #                                  if 'layer_classifier' in name or 'lora_B' in name or 'lora_A' in name}
                 # params_before_nodeclassifier = {name: param.clone().detach() for name, param in model.named_parameters() if 'node_classifier' in name}

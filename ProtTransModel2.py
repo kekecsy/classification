@@ -54,7 +54,7 @@ def Contrastive_loss(db, layer_logits, layers, bottoms, temperature=0.2):
     topk_with_indices = heapq.nlargest(3, enumerate(target), key=lambda x: x[1])
 
     pos_indices = [topk_with_indices[0][0]]
-    for top_indice in topk_with_indices[2:]:
+    for top_indice in topk_with_indices[1:4]:
         distances = torch.ne(layers[top_indice[0],:], 
                                       layers[pos_indices[0],:]).sum()
         if distances == 0:
@@ -76,7 +76,6 @@ def Contrastive_loss(db, layer_logits, layers, bottoms, temperature=0.2):
     if len(neg_indices) == 0:
         return None
     
-
     # 计算损失
     anchor_embeddings = torch.index_select(layer_logits, 0, torch.tensor(pos_indices[0]).to(device))
     positive_embeddings = torch.index_select(layer_logits, 0, torch.tensor(pos_indices[1:]).to(device))

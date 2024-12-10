@@ -279,6 +279,8 @@ validloader = MyDataLoader(validset,
                            collate_fn=collate_func, 
                            batch_sampler=valid_batch_sampler)
 
+model, validloader = accelerator.prepare(model, validloader)
+
 count = 0
 for idx, i in enumerate(validloader):
     # print(i)
