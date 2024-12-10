@@ -2131,9 +2131,97 @@ ep: 3, global_step: 1730, layer accuracy: 0.0, total loss: 0.9130979776382446, l
 node contra_loss: 0.0
 ep: 3, global_step: 1740, layer accuracy: 0.046875, total loss: 1.1383368968963623, layer loss: 0.3596557080745697, bottom loss: 0.38238954544067383, node loss: 0.3962915539741516
 node contra_loss: 0.0
-[2024-12-10 10:43:17,167] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-12-10 10:43:21,252] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-12-10 10:43:21,356] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-12-10 10:43:23,859] [INFO] [comm.py:652:init_distributed] cdb=None
-[2024-12-10 10:43:23,859] [INFO] [comm.py:683:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
-[2024-12-10 10:43:23,886] [INFO] [comm.py:652:init_distributed] cdb=None
+
+[2024-12-10 11:35:30,648] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-12-10 11:35:35,171] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-12-10 11:35:35,181] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-12-10 11:35:37,566] [INFO] [comm.py:652:init_distributed] cdb=None
+[2024-12-10 11:35:37,566] [INFO] [comm.py:683:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2024-12-10 11:35:37,605] [INFO] [comm.py:652:init_distributed] cdb=None
+name:  shared.weight param num:  131072
+name:  encoder.block.23.layer.0.SelfAttention.q.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.q.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.k.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.k.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.v.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.0.SelfAttention.v.lora_B.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.o.lora_A.default.weight param num:  32768
+name:  encoder.block.23.layer.0.SelfAttention.o.lora_B.default.weight param num:  8192
+name:  encoder.block.23.layer.1.DenseReluDense.wi.lora_A.default.weight param num:  8192
+name:  encoder.block.23.layer.1.DenseReluDense.wi.lora_B.default.weight param num:  131072
+name:  encoder.block.23.layer.1.DenseReluDense.wo.lora_A.default.weight param num:  131072
+name:  encoder.block.23.layer.1.DenseReluDense.wo.lora_B.default.weight param num:  8192
+name:  layer_classifier.local_layers.0.0.weight param num:  65536
+name:  layer_classifier.local_layers.0.0.bias param num:  256
+name:  layer_classifier.local_layers.0.2.weight param num:  256
+name:  layer_classifier.local_layers.0.2.bias param num:  256
+name:  layer_classifier.local_layers.0.3.weight param num:  4096
+name:  layer_classifier.local_layers.0.3.bias param num:  16
+name:  layer_classifier.local_layers.1.0.weight param num:  131072
+name:  layer_classifier.local_layers.1.0.bias param num:  512
+name:  layer_classifier.local_layers.1.2.weight param num:  512
+name:  layer_classifier.local_layers.1.2.bias param num:  512
+name:  layer_classifier.local_layers.1.3.weight param num:  75264
+name:  layer_classifier.local_layers.1.3.bias param num:  147
+name:  layer_classifier.global_layers.0.0.weight param num:  262144
+name:  layer_classifier.global_layers.0.0.bias param num:  256
+name:  layer_classifier.global_layers.0.2.weight param num:  256
+name:  layer_classifier.global_layers.0.2.bias param num:  256
+name:  layer_classifier.global_layers.1.0.weight param num:  327680
+name:  layer_classifier.global_layers.1.0.bias param num:  256
+name:  layer_classifier.global_layers.1.2.weight param num:  256
+name:  layer_classifier.global_layers.1.2.bias param num:  256
+name:  layer_classifier.linear.weight param num:  41728
+name:  layer_classifier.linear.bias param num:  163
+name:  node_classifier.layer_score.weight param num:  83456
+name:  node_classifier.layer_score.bias param num:  512
+name:  node_classifier.hidden_score.weight param num:  524288
+name:  node_classifier.hidden_score.bias param num:  512
+name:  node_classifier.batch_norm1.weight param num:  1024
+name:  node_classifier.batch_norm1.bias param num:  1024
+name:  node_classifier.out_proj.weight param num:  1593344
+name:  node_classifier.out_proj.bias param num:  1556
+trainable paras number: 3690842
+layer param: shared.weight
+layer param: encoder.block.23.layer.0.SelfAttention.q.lora_A.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.q.lora_B.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.k.lora_A.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.k.lora_B.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.v.lora_A.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.v.lora_B.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.o.lora_A.default.weight
+layer param: encoder.block.23.layer.0.SelfAttention.o.lora_B.default.weight
+layer param: encoder.block.23.layer.1.DenseReluDense.wi.lora_A.default.weight
+layer param: encoder.block.23.layer.1.DenseReluDense.wi.lora_B.default.weight
+layer param: encoder.block.23.layer.1.DenseReluDense.wo.lora_A.default.weight
+layer param: encoder.block.23.layer.1.DenseReluDense.wo.lora_B.default.weight
+layer param: layer_classifier.local_layers.0.0.weight
+layer param: layer_classifier.local_layers.0.0.bias
+layer param: layer_classifier.local_layers.0.2.weight
+layer param: layer_classifier.local_layers.0.2.bias
+layer param: layer_classifier.local_layers.0.3.weight
+layer param: layer_classifier.local_layers.0.3.bias
+layer param: layer_classifier.local_layers.1.0.weight
+layer param: layer_classifier.local_layers.1.0.bias
+layer param: layer_classifier.local_layers.1.2.weight
+layer param: layer_classifier.local_layers.1.2.bias
+layer param: layer_classifier.local_layers.1.3.weight
+layer param: layer_classifier.local_layers.1.3.bias
+layer param: layer_classifier.global_layers.0.0.weight
+layer param: layer_classifier.global_layers.0.0.bias
+layer param: layer_classifier.global_layers.0.2.weight
+layer param: layer_classifier.global_layers.0.2.bias
+layer param: layer_classifier.global_layers.1.0.weight
+layer param: layer_classifier.global_layers.1.0.bias
+layer param: layer_classifier.global_layers.1.2.weight
+layer param: layer_classifier.global_layers.1.2.bias
+layer param: layer_classifier.linear.weight
+layer param: layer_classifier.linear.bias
+node param: node_classifier.layer_score.weight
+node param: node_classifier.layer_score.bias
+node param: node_classifier.hidden_score.weight
+node param: node_classifier.hidden_score.bias
+node param: node_classifier.batch_norm1.weight
+node param: node_classifier.batch_norm1.bias
+node param: node_classifier.out_proj.weight
+node param: node_classifier.out_proj.bias
