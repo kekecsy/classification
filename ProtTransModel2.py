@@ -2,23 +2,18 @@ import copy
 import numpy as np
 import random
 import json
-
+import pyarrow as pa
 import torch
 from torch import nn
 import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
-from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
-from evaluate import load
-import math
-from transformers.modeling_outputs import SequenceClassifierOutput
 from transformers.models.t5.modeling_t5 import T5Config, T5PreTrainedModel, T5Stack
-from transformers import BertModel, BertTokenizer, BertConfig
-from transformers import TrainingArguments, Trainer, set_seed
+from transformers import set_seed
 from loss import ClassificationLoss
 from loss import LossType
 from dataclasses import dataclass
 from typing import Optional, Tuple
 from transformers.utils import ModelOutput
+import heapq
 
 
 # 设置种子，保证实验可再现
@@ -44,6 +39,61 @@ def multilabel_categorical_crossentropy(y_pred,y_true):
     neg_loss = torch.logsumexp(y_pred_neg, axis=-1)
     pos_loss = torch.logsumexp(y_pred_pos, axis=-1)
     return neg_loss + pos_loss
+
+def Contrastive_loss(db, layer_logits, layers, bottoms, temperature=0.2):
+
+    device = layer_logits.device
+
+    table_names = ['sub_vector']
+    table = db.open_table(table_names[0])
+    # 先找出正负样本对
+    target = []
+    for labels in bottoms:
+        target.append(table.search(labels.tolist()).limit(1).to_list()[0]['sub_frequence'])
+    
+    topk_with_indices = heapq.nlargest(3, enumerate(target), key=lambda x: x[1])
+
+    pos_indices = [topk_with_indices[0][0]]
+    for top_indice in topk_with_indices[2:]:
+        distances = torch.ne(layers[top_indice[0],:], 
+                                      layers[pos_indices[0],:]).sum()
+        if distances == 0:
+            pos_indices.append(top_indice[0])
+
+    if len(pos_indices) == 1:
+        return None
+
+    bottomk_with_indices = heapq.nsmallest(3, enumerate(target), key=lambda x: x[1])
+
+    neg_indices = []
+    for bottom_indice in bottomk_with_indices:
+        different_elements = torch.ne(layers[bottom_indice[0],:], 
+                                      layers[pos_indices[0],:])
+        distances = torch.sum(different_elements, dim=-1)
+        if distances > 3:
+            neg_indices.append(bottom_indice[0])
+
+    if len(neg_indices) == 0:
+        return None
+    
+
+    # 计算损失
+    anchor_embeddings = torch.index_select(layer_logits, 0, torch.tensor(pos_indices[0]).to(device))
+    positive_embeddings = torch.index_select(layer_logits, 0, torch.tensor(pos_indices[1:]).to(device))
+    negative_embeddings = torch.index_select(layer_logits, 0, torch.tensor(neg_indices).to(device))
+    sim_pos = F.cosine_similarity(anchor_embeddings.unsqueeze(1), positive_embeddings, dim=-1) / temperature
+
+    negative_embeddings = torch.split(negative_embeddings, sim_pos.size(0), dim=0)
+    negative_embeddings = torch.stack(negative_embeddings, dim=1)
+    sim_neg = torch.bmm(
+        anchor_embeddings.unsqueeze(1), 
+        negative_embeddings.transpose(1, 2)
+    ).squeeze(1) / temperature
+    logits = torch.cat([sim_pos, sim_neg], dim=1)
+    labels = torch.randint(0, sim_pos.size(1), (logits.size(0),), dtype=torch.long, device=logits.device)
+    loss = 1e-3 * F.cross_entropy(logits, labels)
+
+    return loss
 
 
 #****参考的源地址：https://gist.github.com/sam-writer/723baf81c501d9d24c6955f201d86bbb
@@ -74,59 +124,14 @@ class SelfAttentionLayer(nn.Module):
         attn_output = torch.matmul(attn_weights, V)
         return attn_output
 
-class RMSNorm(nn.Module):
-    def __init__(self, d, p=-1., eps=1e-8, bias=False):
-        """
-            Root Mean Square Layer Normalization
-        :param d: model size
-        :param p: partial RMSNorm, valid value [0, 1], default -1.0 (disabled)
-        :param eps:  epsilon value, default 1e-8
-        :param bias: whether use bias term for RMSNorm, disabled by
-            default because RMSNorm doesn't enforce re-centering invariance.
-        """
-        super(RMSNorm, self).__init__()
-
-        self.eps = eps
-        self.d = d
-        self.p = p
-        self.bias = bias
-
-        self.scale = nn.Parameter(torch.ones(d))
-        self.register_parameter("scale", self.scale)
-
-        if self.bias:
-            self.offset = nn.Parameter(torch.zeros(d))
-            self.register_parameter("offset", self.offset)
-
-    def forward(self, x):
-        if self.p < 0. or self.p > 1.:
-            norm_x = x.norm(2, dim=-1, keepdim=True)
-            d_x = self.d
-        else:
-            partial_size = int(self.d * self.p)
-            partial_x, _ = torch.split(x, [partial_size, self.d - partial_size], dim=-1)
-
-            norm_x = partial_x.norm(2, dim=-1, keepdim=True)
-            d_x = partial_size
-
-        rms_x = norm_x * d_x ** (-1. / 2)
-        x_normed = x / (rms_x + self.eps)
-
-        if self.bias:
-            return self.scale * x_normed + self.offset
-
-        return self.scale * x_normed
-
-
-
 class HMCNClassificationHead(nn.Module):
     """Head for sentence-level classification tasks."""
 
     def __init__(self, config, class_config):
         super().__init__()
-        self.hierarchical_depth = [0, 128, 192, 256]
-        self.global2local = [0, 128, 192, 256]
-        self.hierarchical_class = [44, 42, 44]
+        self.hierarchical_depth = [0, 256, 256]
+        self.global2local = [0, 256, 512]
+        self.hierarchical_class = [16, 147]
         # 定义local层和global层
         self.local_layers = torch.nn.ModuleList()
         self.global_layers = torch.nn.ModuleList()
@@ -216,11 +221,46 @@ class ClassificationHead(nn.Module):
 @dataclass
 class MySequenceClassifierOutput(ModelOutput):
     layer_loss: Optional[torch.FloatTensor] = None
-    node_loss: Optional[torch.FloatTensor] = None
-    node_logits: torch.FloatTensor = None
-    layer_logits: torch.FloatTensor = None
+    # node_loss: Optional[torch.FloatTensor] = None
+    # regular_loss: Optional[torch.FloatTensor] = None
+    # node_logits: torch.FloatTensor = None
+    # layer_logits: torch.FloatTensor = None
     hidden_states: Optional[Tuple[torch.FloatTensor, ...]] = None
-    attentions: Optional[Tuple[torch.FloatTensor, ...]] = None
+    # attentions: Optional[Tuple[torch.FloatTensor, ...]] = None
+    # nodes: Optional[Tuple[torch.FloatTensor, ...]] = None
+    # layers: Optional[Tuple[torch.FloatTensor, ...]] = None
+
+
+def LayerLoss(loss_fn, global_logits, local_logits, layers, cluster_relations, penalty, is_multiss=False, use_hierar=False):
+    loss1 = loss_fn(global_logits,
+                            layers,
+                            use_hierar, # use_hierar
+                            is_multiss, # is_multiss
+                            penalty, # 惩罚因子
+                            global_logits,
+                            cluster_relations)
+    loss2 = loss_fn(local_logits,
+                                layers,
+                                use_hierar, # use_hierar
+                                is_multiss, # is_multiss
+                                penalty, # 惩罚因子
+                                global_logits,
+                                cluster_relations)
+
+    return loss1[0] + loss2[0], loss2[1] + loss2[1]
+
+def NodeLoss(loss_fn, node_logits, nodes ,layer_loss ,bottom_loss, cluster_nodes_relations, is_multiss=False, use_hierar=False):
+    node_loss = loss_fn(node_logits,
+                        nodes,
+                        use_hierar,
+                        is_multiss,
+                        1e-2, # 惩罚因子
+                        layer_loss,
+                        bottom_loss,
+                        cluster_nodes_relations,
+                        )
+    return node_loss
+
 
 
 class T5EncoderCLSModel(T5PreTrainedModel):
@@ -234,7 +274,6 @@ class T5EncoderCLSModel(T5PreTrainedModel):
         encoder_config.use_cache = False
         encoder_config.is_encoder_decoder = False
         # self.encoder = BertModel(encoder_config, self.shared)
-        # self.encoder = T5Stack(encoder_config, self.shared)
         self.encoder = T5Stack(encoder_config, self.shared)
 
         # self.dropout = nn.Dropout(0.15)
@@ -244,8 +283,12 @@ class T5EncoderCLSModel(T5PreTrainedModel):
 
         self.penalty = 1e-7
 
-        self.layer_loss_fn = ClassificationLoss(label_size=class_config.layer_nums,loss_type=LossType.BCE_WITH_LOGITS, alpha=alpha)
-        self.nodes_loss_fn = ClassificationLoss(label_size=class_config.layer_nums + class_config.node_nums,loss_type=LossType.SIGMOID_FOCAL_CROSS_ENTROPY, alpha=alpha)
+        self.layer_loss_fn = ClassificationLoss(label_size=class_config.layer_nums,\
+                                                loss_type=LossType.BCE_WITH_LOGITS,\
+                                                alpha=alpha)
+        self.nodes_loss_fn = ClassificationLoss(label_size=class_config.layer_nums + class_config.node_nums, \
+                                                loss_type=LossType.SIGMOID_FOCAL_CROSS_ENTROPY, \
+                                                alpha=alpha)
 
         self.layer_classifier = HMCNClassificationHead(config, class_config)
         self.node_classifier = ClassificationHead(config, class_config)
@@ -265,7 +308,6 @@ class T5EncoderCLSModel(T5PreTrainedModel):
         output_hidden_states=None,
         return_dict=None,
     ):
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         outputs = self.encoder(
             input_ids,
             attention_mask=attention_mask,
@@ -275,27 +317,17 @@ class T5EncoderCLSModel(T5PreTrainedModel):
         #                     (self.mean_pooling(outputs[0],attention_mask), self.max_pooling(outputs[0],attention_mask)),
         #                     dim=1
         # ).to(torch.bfloat16)
-        
-        global_logits, local_logits, layer_logits = self.layer_classifier(hidden_states)
-        
-        layer_loss = self.layer_loss_fn(
-                            global_logits,
-                            layers,
-                            True, # use_hierar
-                            True, # is_multi
-                            self.penalty, # 惩罚因子
-                            global_logits,
-                            self.cluster_relations
-                            )
-        layer_loss += self.layer_loss_fn(
-                            local_logits,
-                            layers,
-                            True,
-                            True,
-                            self.penalty, # 惩罚因子
-                            local_logits,
-                            self.cluster_relations
-                            )
+        return MySequenceClassifierOutput(
+                                    # layer_loss=layer_loss,
+                                    # node_loss=node_loss,
+                                    # regular_loss=regular_loss,
+                                    # node_logits=node_logits,
+                                    # layer_logits=layer_logits,
+                                    hidden_states=hidden_states,
+                                    # attentions=outputs.attentions
+                                    # nodes=nodes,
+                                    # layers=layers
+                                    )
 
         node_logits = self.node_classifier(layer_logits, hidden_states)
         mask_tensor = torch.zeros_like(node_logits)

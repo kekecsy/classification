@@ -446,9 +446,9 @@ def train(model, optimizer, trainloader, validloader, accelerator: Accelerator, 
                 output = model(**batch)
                 layer_loss = output.layer_loss
                 node_loss = output.node_loss
-                
+                regular_loss = output.regular_loss
                 if not only_layer_metrics:
-                    loss = layer_loss + node_loss
+                    loss = layer_loss + node_loss + regular_loss
 
                     accelerator.backward(loss)
                     optimizer.step()
