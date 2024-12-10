@@ -16,7 +16,7 @@ import torch
 import torch.nn as nn
 import json
 from util import Type
-
+import torch.nn.functional as F
 
 class LossType(Type):
     """Standard names for loss type
@@ -60,6 +60,7 @@ class FocalLoss(nn.Module):
         self.gamma = gamma
         self.alpha = alpha
         self.epsilon = epsilon
+        self.beta = 1.0
 
     def forward(self, logits, target):
         """
@@ -81,19 +82,42 @@ class FocalLoss(nn.Module):
                    (logits + self.epsilon).log()
             loss = loss.sum(1)
         elif self.activation_type == ActivationType.SIGMOID:
-            multi_hot_key = target
-            logits = torch.sigmoid(logits)
-            zero_hot_key = 1 - multi_hot_key
-            loss = - torch.tensor(self.alpha).to(multi_hot_key.device) * multi_hot_key * \
-                   torch.pow((1 - logits), self.gamma) * \
-                   (logits + self.epsilon).log()
-            loss += -(1 - torch.tensor(self.alpha).to(multi_hot_key.device)) * zero_hot_key * \
-                    torch.pow(logits, self.gamma) * \
-                    (1 - logits + self.epsilon).log()
             
+            # 法3
+            probas = torch.sigmoid(logits)
+            pt = probas.where(target == 1, 1 - probas)  # 如果目标是 1，则取 probas；如果目标是 0，则取 1 - probas
+            
+            alpha = torch.tensor(self.alpha).view(1, -1).expand_as(target).to(pt.device)  # 扩展 alpha 以匹配 targets 的形状
+            loss = -alpha * (1 - pt) ** self.gamma * torch.log(pt + self.epsilon)
+
+            # 法1
+            # multi_hot_key = target
+            # logits = torch.sigmoid(logits)
+            # zero_hot_key = 1 - multi_hot_key
+            # alpha = torch.tensor(self.alpha).expand_as(target)
+
+            # loss = - alpha.to(multi_hot_key.device) * multi_hot_key * \
+            #        torch.pow((1 - logits), self.gamma) * \
+            #        (logits + self.epsilon).log()
+            # loss += -(1 - alpha.to(multi_hot_key.device)) * zero_hot_key * \
+            #         torch.pow(logits, self.gamma) * \
+            #         (1 - logits + self.epsilon).log()
+            
+            # 法2
             # bce_loss = nn.functional.binary_cross_entropy_with_logits(logits, target, reduction='none')
             # alpha = torch.tensor(self.alpha).to(target.device) * target + (1 - torch.tensor(self.alpha).to(target.device)) * (1 - target)
             # loss = (alpha * ((1 - logits) ** self.gamma) * bce_loss).mean()
+
+            # seesaw loss
+            # probs = torch.sigmoid(logits)
+            # positive_counts = target.sum(dim=0)
+            # total_samples = target.size(0)
+            # positive_ratios = positive_counts / total_samples
+            # avg_positive_ratio = positive_ratios.mean()
+            # lambda_weights = 1 / (1 + torch.exp(-self.beta * (positive_ratios - avg_positive_ratio)))
+            # ce_loss = F.binary_cross_entropy(probs, target, reduction='none')
+            # focal_term = (1 - probs) ** self.gamma * ce_loss
+            # loss = lambda_weights * focal_term * target + (1 - lambda_weights) * focal_term * (1 - target)
 
         else:
             raise TypeError("Unknown activation type: " + self.activation_type
@@ -115,7 +139,7 @@ class ClassificationLoss(torch.nn.Module):
         elif loss_type == LossType.SIGMOID_FOCAL_CROSS_ENTROPY:
             self.criterion = FocalLoss(label_size, ActivationType.SIGMOID, alpha)
         elif loss_type == LossType.BCE_WITH_LOGITS:
-            self.criterion = torch.nn.BCEWithLogitsLoss()
+            self.criterion = torch.nn.BCEWithLogitsLoss(reduction='none')
         else:
             raise TypeError(
                 "Unsupported loss type: %s. Supported loss type is: %s" % (
@@ -128,18 +152,34 @@ class ClassificationLoss(torch.nn.Module):
         device = logits.device
         if use_hierar:
             if self.loss_type == LossType.BCE_WITH_LOGITS:
-                hierar_penalty, hierar_paras, hierar_relations = argvs[0:3]
-                return self.criterion(logits, target) + \
-                    hierar_penalty * self.cal_recursive_regularize(hierar_paras,
+                _, _, hierar_relations = argvs[0:3]
+                all_loss = self.criterion(logits, target)
+                layer_loss = all_loss[:,:len(hierar_relations.keys())]
+                return layer_loss, self.cal_recursive_regularize3(all_loss,
                                                                     hierar_relations,
                                                                     device)
+                # return self.criterion(top_logits, top_target) + self.criterion(bottom_logits, bottom_target) +\
+                #     hierar_penalty * self.cal_recursive_regularize(hierar_paras,
+                #                                                     hierar_relations,
+                #                                                     device)
+            
+                # return self.criterion(logits, target) + \
+                #     hierar_penalty * self.cal_recursive_regularize(hierar_paras,
+                #                                                     hierar_relations,
+                #                                                     device)
             elif self.loss_type == LossType.SIGMOID_FOCAL_CROSS_ENTROPY:
-                hierar_penalty, hierar_paras, cluster_nodes_relations, hierar_relations = argvs[0:4]
-                return self.criterion(logits, target) + \
-                    hierar_penalty * self.cal_recursive_regularize2(hierar_paras,
-                                                                    logits,
-                                                                    cluster_nodes_relations,
-                                                                    device)
+                criterion = torch.nn.BCEWithLogitsLoss(reduction='none')
+                _, layer_loss, bottom_loss, cluster_nodes_relations = argvs[0:4]
+                all_loss = criterion(logits, target)
+                return self.cal_recursive_regularize2(all_loss,
+                                                    layer_loss,
+                                                    bottom_loss,
+                                                    cluster_nodes_relations,
+                                                    device)
+                # return self.criterion(logits, target), self.cal_recursive_regularize2(all_loss,
+                #                                                                     bottom_loss,
+                #                                                                     cluster_nodes_relations,
+                #                                                                     device)
         else:
             if is_multi:
                 assert self.loss_type in [LossType.BCE_WITH_LOGITS,
@@ -158,32 +198,52 @@ class ClassificationLoss(torch.nn.Module):
         recursive_loss = 0.0
         for i in hierar_relations.keys():
             children_ids = hierar_relations[i]
-            children_ids_list = torch.tensor(children_ids, dtype=torch.long).to(device)
+            children_ids_list = torch.tensor(children_ids, dtype=torch.long).to(paras.device)
             children_paras = torch.index_select(paras, 1, children_ids_list)
-            parent_para = torch.index_select(paras, 1, torch.tensor(int(i)).to(device))
+            parent_para = torch.index_select(paras, 1, torch.tensor(int(i)).to(paras.device))
             parent_para = parent_para.repeat(1,children_ids_list.size()[0])
             diff_paras = parent_para - children_paras
             diff_paras = torch.relu(diff_paras.view(diff_paras.size()[0], -1))
             recursive_loss += 1.0 / 2 * torch.norm(diff_paras, p=2) ** 2
         return recursive_loss
     
-    def cal_recursive_regularize2(self, layer_logits, node_logits, hierar_relations, device="cpu"):
+    def cal_recursive_regularize2(self, all_loss, layer_loss, bottom_loss, hierar_relations, device="cpu"):
         """ Only support hierarchical text classification with BCELoss
         references: http://www.cse.ust.hk/~yqsong/papers/2018-WWW-Text-GraphCNN.pdf
                     http://www.cs.cmu.edu/~sgopal1/papers/KDD13.pdf
         """
-        recursive_loss = 0.0
+        recursive_loss = []
+        for i in range(bottom_loss.size(1)):
+            # children_ids = hierar_relations[i]
+            # children_ids_list = torch.tensor(children_ids, dtype=torch.long).to(device)
+            # children_paras = torch.index_select(node_logits, 1, children_ids_list)
+            # parent_para = torch.index_select(layer_logits, 1, torch.tensor(int(i)).to(device))
+            # parent_para = parent_para.repeat(1,children_ids_list.size()[0])
+            # diff_paras = parent_para - children_paras
+            # diff_paras = torch.relu(diff_paras.view(diff_paras.size()[0], -1))
+            # recursive_loss += 1.0 / 2 * (torch.norm(diff_paras, p=2)) ** 2
+            index = i + layer_loss.size(1)
+            children_ids = hierar_relations[str(index)]
+            children_ids_list = torch.tensor(children_ids, dtype=torch.long).to(device)
+            children_loss = torch.index_select(all_loss, 1, children_ids_list)
+            parent_loss = torch.index_select(bottom_loss, 1, torch.tensor(i).to(device))
+
+            children_loss = torch.where(parent_loss > children_loss, parent_loss, children_loss)
+            recursive_loss.append(children_loss)
+        
+        return torch.concat(recursive_loss,dim=1)
+    
+    def cal_recursive_regularize3(self, all_loss, hierar_relations, device):
+        recursive_loss = []
         for i in hierar_relations.keys():
             children_ids = hierar_relations[i]
             children_ids_list = torch.tensor(children_ids, dtype=torch.long).to(device)
-            children_paras = torch.index_select(node_logits, 1, children_ids_list)
-            parent_para = torch.index_select(layer_logits, 1, torch.tensor(int(i)).to(device))
-            parent_para = parent_para.repeat(1,children_ids_list.size()[0])
+            children_loss = torch.index_select(all_loss, 1, children_ids_list)
+            parent_loss = torch.index_select(all_loss, 1, torch.tensor(int(i)).to(device))
 
-            # children_paras = torch.where((parent_para - torch.relu(parent_para)) < 0,
-            #                              parent_para,
-            #                              children_paras)
-            diff_paras = parent_para - children_paras
-            diff_paras = torch.relu(diff_paras.view(diff_paras.size()[0], -1))
-            recursive_loss += 1.0 / 2 * (torch.norm(diff_paras, p=2)) ** 2
-        return recursive_loss
+            children_loss = torch.where(parent_loss > children_loss, parent_loss, children_loss)
+            recursive_loss.append(children_loss)
+            # diff_paras = parent_para - children_paras
+            # diff_paras = torch.relu(diff_paras.view(diff_paras.size()[0], -1))
+            # recursive_loss += 1.0 / 2 * (torch.norm(diff_paras, p=2)) ** 2
+        return torch.concat(recursive_loss,dim=1)
